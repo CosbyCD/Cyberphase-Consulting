@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyberphase — Data Infrastructure Strategy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A1628; --navy-mid: #0D2040; --navy-light: #1A3A5C;
+    --cyan: #00C8F0; --gold: #FFB800; --white: #F0F4F8; --muted: #6B8BA4;
+    --font-display: 'Space Grotesk', sans-serif; --font-mono: 'Space Mono', monospace;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--navy); color: var(--white); font-family: var(--font-display); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; background: rgba(10,22,40,0.92); border-bottom: 1px solid rgba(0,200,240,0.12); backdrop-filter: blur(8px); }
+  .nav-brand { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; letter-spacing: 4px; color: var(--white); text-decoration: none; }
+  .nav-brand span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--cyan); }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6rem 2rem 4rem; }
+
+  /* Logo animations */
+  .rim { stroke-dasharray: 630; stroke-dashoffset: 630; animation: draw 1.4s ease forwards 0.3s; }
+  .s1{stroke-dasharray:70;stroke-dashoffset:70;animation:draw 0.35s ease forwards 1.7s}
+  .s2{stroke-dasharray:70;stroke-dashoffset:70;animation:draw 0.35s ease forwards 1.9s}
+  .s3{stroke-dasharray:70;stroke-dashoffset:70;animation:draw 0.35s ease forwards 2.1s}
+  .s4{stroke-dasharray:70;stroke-dashoffset:70;animation:draw 0.35s ease forwards 2.3s}
+  .s5{stroke-dasharray:70;stroke-dashoffset:70;animation:draw 0.35s ease forwards 2.5s}
+  .s6{stroke-dasharray:70;stroke-dashoffset:70;animation:draw 0.35s ease forwards 2.7s}
+  .s7{stroke-dasharray:70;stroke-dashoffset:70;animation:draw 0.35s ease forwards 2.9s}
+  .s8{stroke-dasharray:70;stroke-dashoffset:70;animation:draw 0.35s ease forwards 3.1s}
+  .pcb { stroke-dasharray: 150; stroke-dashoffset: 150; animation: draw 0.6s ease forwards 3.3s; }
+  .dot { opacity: 0; animation: pop 0.25s ease forwards 3.7s; }
+  .hub { opacity: 0; animation: pop 0.4s ease forwards 4.1s; }
+  .hero-name { opacity: 0; animation: fadeup 0.8s ease forwards 4.5s; }
+  .hero-divider { opacity: 0; animation: fadeup 0.8s ease forwards 4.8s; }
+  .hero-sub { opacity: 0; animation: fadeup 0.8s ease forwards 5.0s; }
+  .hero-cta { opacity: 0; animation: fadeup 0.8s ease forwards 5.2s; }
+
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pop { 0%{opacity:0;transform:scale(0.2)} 100%{opacity:1;transform:scale(1)} }
+  @keyframes fadeup { 0%{opacity:0;transform:translateY(14px)} 100%{opacity:1;transform:translateY(0)} }
+  @keyframes helm-turn {
+    0%   { transform: rotate(0deg) rotateX(0deg); }
+    35%  { transform: rotate(30deg) rotateX(0deg); }
+    55%  { transform: rotate(24deg) rotateX(0deg); }
+    70%  { transform: rotate(25deg) rotateX(0deg); }
+    100% { transform: rotate(25deg) rotateX(25deg); }
+  }
+  .logo-wrap { perspective: 700px; }
+  .helm-group { animation: helm-turn 3.6s cubic-bezier(0.4, 0, 0.2, 1) forwards 5.6s; transform-origin: 0px 0px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; stroke-dashoffset: 0 !important; opacity: 1 !important; } }
+
+  .logo-wrap { margin-bottom: 2rem; }
+
+  .hero-name { font-family: var(--font-mono); font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; letter-spacing: 8px; color: var(--white); text-align: center; }
+  .hero-name span { color: var(--cyan); }
+  .hero-divider { display: flex; align-items: center; gap: 1rem; margin: 0.8rem 0; }
+  .hero-divider-line { width: 55px; height: 1px; background: var(--gold); }
+  .hero-tagline { font-size: 0.8rem; letter-spacing: 3px; color: var(--cyan); text-transform: uppercase; }
+  .hero-sub { max-width: 540px; text-align: center; color: var(--muted); font-size: 1rem; margin-top: 1.2rem; }
+  .hero-cta { margin-top: 2.2rem; }
+
+  .btn-primary { display: inline-block; padding: 0.9rem 2.2rem; background: transparent; border: 1.5px solid var(--cyan); color: var(--cyan); font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 2px; text-decoration: none; text-transform: uppercase; transition: background 0.2s, color 0.2s; }
+  .btn-primary:hover { background: var(--cyan); color: var(--navy); }
+
+  section { padding: 6rem 2rem; max-width: 1000px; margin: 0 auto; }
+  .section-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--white); margin-bottom: 1.5rem; line-height: 1.3; }
+  .section-title span { color: var(--cyan); }
+  .section-body { color: var(--muted); font-size: 1.05rem; max-width: 620px; line-height: 1.8; }
+  .divider { width: 100%; height: 1px; background: rgba(0,200,240,0.1); }
+
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .service-card { background: var(--navy-mid); border: 1px solid rgba(0,200,240,0.12); padding: 2rem; transition: border-color 0.2s, transform 0.2s; }
+  .service-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
+  .service-icon { width: 40px; height: 40px; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--gold); letter-spacing: 1px; }
+  .service-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; letter-spacing: 1px; }
+  .service-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+  .serve-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .serve-list li { display: flex; align-items: flex-start; gap: 1rem; color: var(--muted); font-size: 1rem; }
+  .serve-list li::before { content: '→'; color: var(--cyan); font-family: var(--font-mono); flex-shrink: 0; margin-top: 2px; }
+
+  .pricing-box { background: var(--navy-mid); border: 1px solid rgba(0,200,240,0.2); padding: 3rem; margin-top: 3rem; display: flex; flex-wrap: wrap; gap: 3rem; align-items: center; justify-content: space-between; }
+  .price-amount { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700; color: var(--cyan); }
+  .price-label { font-size: 0.8rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-top: 0.3rem; }
+  .price-note { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+
+  .cta-section { text-align: center; padding: 6rem 2rem; background: var(--navy-mid); border-top: 1px solid rgba(0,200,240,0.1); border-bottom: 1px solid rgba(0,200,240,0.1); }
+
+  footer { padding: 3rem 2rem; text-align: center; border-top: 1px solid rgba(0,200,240,0.08); }
+  .footer-brand { font-family: var(--font-mono); font-size: 1rem; letter-spacing: 4px; color: var(--white); margin-bottom: 1rem; }
+  .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--cyan); }
+  .footer-copy { color: var(--muted); font-size: 0.8rem; }
+  @media (max-width: 640px) { .nav-links { display: none; } .pricing-box { flex-direction: column; gap: 2rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-brand">CYBER<span>PHASE</span></a>
+  <ul class="nav-links">
+    <li><a href="#what-we-do">What we do</a></li>
+    <li><a href="#stack">Our stack</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <!-- 3D Helm wheel sits on top -->
+  <canvas id="helmCanvas" width="320" height="320" style="display:block;margin:0 auto;"></canvas>
+
+  <!-- Binary ticker strip below the wheel — data comes in left, words come out right -->
+  <canvas id="tickerCanvas" style="display:block;width:100%;max-width:860px;height:48px;margin:0.5rem auto 0;"></canvas>
+
+  <h1 class="hero-name">CYBER<span>PHASE</span></h1>
+  <p class="hero-sub">You have data. We help you structure it for increased ROI and discoverability — building the pipeline and the dashboards, then handing it back to you ready to run. Yours to own, yours to grow.</p>
+  <div class="hero-cta">
+    <a href="https://calendly.com" class="btn-primary">Book a free discovery call</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="what-we-do">
+  <p class="section-label">What we do</p>
+  <h2 class="section-title">The data doesn't lie.<br><span>Neither do we.</span></h2>
+  <p class="section-body">Cyberphase helps early-stage companies make their first serious data decisions. We assess what you have, understand where you're going, and build or guide you toward a data infrastructure that serves your actual business — not a template someone else followed.<br><br>We've worked across aviation, energy, financial services, food manufacturing, healthcare, and operations. The industries change. The discipline doesn't.</p>
+</section>
+
+<div class="divider"></div>
+
+<section id="stack">
+  <p class="section-label">The right tool for the job</p>
+  <h2 class="section-title">We match the stack <span>to what you actually need.</span></h2>
+  <p class="section-body">Not every company needs the same solution. We work with powerful, low-cost and open-source platforms — and build you exactly what your data requires. Nothing more, nothing to bill you for later.</p>
+
+  <div class="services-grid" style="margin-top:2.5rem;">
+    <div class="service-card">
+      <div class="service-icon" style="border-color:#00C8F0;color:#00C8F0;">CH</div>
+      <h3 class="service-title">ClickHouse</h3>
+      <p class="service-desc">When you need speed. Columnar storage built for analytical queries on massive datasets. Real-time dashboards, fast aggregations, billions of rows — no problem.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="border-color:#00C8F0;color:#00C8F0;">PG</div>
+      <h3 class="service-title">PostgreSQL</h3>
+      <p class="service-desc">When you need reliability and scale. Battle-tested relational database with powerful querying, rock-solid data integrity, and a massive ecosystem of tools.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="border-color:#FFB800;color:#FFB800;">TB</div>
+      <h3 class="service-title">Tableau</h3>
+      <p class="service-desc">When you need visibility. Interactive dashboards and visualizations that make your data discoverable — built so your team can actually use them, not just look at them.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="border-color:#FFB800;color:#FFB800;">+</div>
+      <h3 class="service-title">And more</h3>
+      <p class="service-desc">SQL, R, Python, Git, Bash, Salesforce, SAP, Excel — we work with the tools that fit your team and your budget. No vendor lock-in, no unnecessary complexity.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="services">
+  <p class="section-label">Services</p>
+  <h2 class="section-title">Where we <span>help</span></h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">01</div>
+      <h3 class="service-title">Stack Assessment</h3>
+      <p class="service-desc">We evaluate your current data environment and tell you exactly what's working, what isn't, and what you actually need — before you spend money building the wrong thing.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">02</div>
+      <h3 class="service-title">Infrastructure Strategy</h3>
+      <p class="service-desc">We design a data infrastructure roadmap matched to your business goals, team size, and growth trajectory. Clear decisions, documented rationale, no vendor lock-in surprises.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">03</div>
+      <h3 class="service-title">Pipeline & Reporting</h3>
+      <p class="service-desc">We build data pipelines, dashboards, and KPI frameworks that give your team real visibility into what's happening in your business — and why.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">04</div>
+      <h3 class="service-title">Data Governance</h3>
+      <p class="service-desc">We establish documentation standards, data dictionaries, and governance frameworks that keep your infrastructure clean, auditable, and ready to scale.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <p class="section-label">Who we work with</p>
+  <h2 class="section-title">Built for companies <span>making their first serious data decisions</span></h2>
+  <ul class="serve-list">
+    <li>Founders who know they need a data strategy but don't know where to start</li>
+    <li>Early-stage companies outgrowing spreadsheets and needing their first real stack</li>
+    <li>Teams that have data but can't get answers out of it</li>
+    <li>Companies preparing for their first serious audit, investor review, or compliance requirement</li>
+    <li>Organizations that made fast early data decisions and now need to untangle them</li>
+  </ul>
+</section>
+
+<div class="divider"></div>
+
+<section id="pricing">
+  <p class="section-label">Pricing</p>
+  <h2 class="section-title">Transparent. <span>No surprises.</span></h2>
+  <p class="section-body">Engagements start with a free 30-minute discovery call. From there we scope the work together.</p>
+  <div class="pricing-box">
+    <div>
+      <div class="price-amount">$150</div>
+      <div class="price-label">Per hour</div>
+      <div class="price-note">Four-hour minimum per engagement</div>
+    </div>
+    <div>
+      <div class="price-amount">Free</div>
+      <div class="price-label">Discovery call</div>
+      <div class="price-note">30 minutes — no obligation</div>
+    </div>
+    <div>
+      <a href="https://calendly.com" class="btn-primary">Book your discovery call</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="cta-section" id="contact">
+  <div style="max-width:600px;margin:0 auto;">
+    <p class="section-label" style="text-align:center">Ready to start</p>
+    <h2 class="section-title" style="text-align:center">Let's figure out <span>what your data is actually doing.</span></h2>
+    <p class="section-body" style="text-align:center;margin:0 auto 2.5rem;">The first conversation is free. Bring your questions, your stack, or just your frustration — we'll take it from there.</p>
+    <a href="https://calendly.com" class="btn-primary">Book a free discovery call</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">CYBERPHASE</div>
+  <div class="footer-links">
+    <a href="https://cyberphase.consulting">cyberphase.consulting</a>
+    <a href="https://linkedin.com/in/cherriecosby">LinkedIn</a>
+    <a href="https://github.com/CosbyCD/Data-Analytics-Portfolio">Portfolio</a>
+  </div>
+  <p class="footer-copy">© 2026 Cyberphase. All rights reserved.</p>
+</footer>
+
+<!-- Three.js for the 3D helm -->
+<!-- Three.js for 3D helm -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function() {
+
+  const FONT_MONO = "'Space Mono', monospace";
+  const TAGLINE = "WE BUILD OUT YOUR DREAMS — ONE STACK AT A TIME";
+
+  // ---- THREE.JS: 3D HELM ----
+  const helmCanvas = document.getElementById('helmCanvas');
+  const renderer = new THREE.WebGLRenderer({ canvas: helmCanvas, antialias: true, alpha: true });
+  renderer.setSize(320, 320);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+  camera.position.set(0, 0, 5.5);
+
+  const cyanMat = new THREE.MeshStandardMaterial({ color: 0x00C8F0, metalness: 0.6, roughness: 0.3, emissive: 0x003344 });
+  const goldMat = new THREE.MeshStandardMaterial({ color: 0xFFB800, metalness: 0.8, roughness: 0.2, emissive: 0x332200 });
+  const darkMat = new THREE.MeshStandardMaterial({ color: 0x0D2040, metalness: 0.4, roughness: 0.6 });
+
+  scene.add(new THREE.AmbientLight(0x112233, 1.0));
+  const kl = new THREE.DirectionalLight(0x00C8F0, 2.0); kl.position.set(2,3,4); scene.add(kl);
+  const fl = new THREE.DirectionalLight(0xFFB800, 0.7); fl.position.set(-3,-1,2); scene.add(fl);
+  const rl = new THREE.DirectionalLight(0xffffff, 0.5); rl.position.set(0,-4,-2); scene.add(rl);
+
+  const helm = new THREE.Group();
+  scene.add(helm);
+
+  // Rim
+  helm.add(new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.065, 16, 80), cyanMat));
+  helm.add(new THREE.Mesh(new THREE.TorusGeometry(1.42, 0.022, 12, 80),
+    new THREE.MeshStandardMaterial({ color: 0x00C8F0, transparent: true, opacity: 0.4, emissive: 0x001122 })));
+
+  // 8 spokes
+  for (let i = 0; i < 8; i++) {
+    const a = (i/8)*Math.PI*2;
+    const s = new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,1.12,8), cyanMat);
+    s.position.set(Math.sin(a)*0.82, Math.cos(a)*0.82, 0);
+    s.rotation.z = -a; helm.add(s);
+  }
+
+  // 8 handles — radial pegs around outside of rim
+  for (let i = 0; i < 8; i++) {
+    const a = (i/8)*Math.PI*2;
+    const h = new THREE.Mesh(new THREE.CylinderGeometry(0.048,0.048,0.34,10), darkMat);
+    h.position.set(Math.sin(a)*1.76, Math.cos(a)*1.76, 0);
+    h.rotation.z = -a; helm.add(h);
+    const co = new THREE.Mesh(new THREE.SphereGeometry(0.055,8,8), cyanMat);
+    co.position.set(Math.sin(a)*1.94, Math.cos(a)*1.94, 0); helm.add(co);
+    const ci = new THREE.Mesh(new THREE.SphereGeometry(0.055,8,8), cyanMat);
+    ci.position.set(Math.sin(a)*1.58, Math.cos(a)*1.58, 0); helm.add(ci);
+  }
+
+  // Hub
+  helm.add(new THREE.Mesh(new THREE.TorusGeometry(0.28,0.042,12,40), cyanMat));
+  const hd = new THREE.Mesh(new THREE.CylinderGeometry(0.24,0.24,0.06,32), darkMat);
+  hd.rotation.x = Math.PI/2; helm.add(hd);
+  const boss = new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.12,0.1,24), goldMat);
+  boss.rotation.x = Math.PI/2; helm.add(boss);
+  helm.add(new THREE.Mesh(new THREE.TorusGeometry(0.18,0.018,8,32), goldMat));
+  const pin = new THREE.Mesh(new THREE.SphereGeometry(0.056,10,10), goldMat);
+  pin.position.z = 0.065; helm.add(pin);
+
+  // ---- 2D CANVAS: TICKER STRIP ----
+  const ticker = document.getElementById('tickerCanvas');
+  const TW = ticker.offsetWidth || 860;
+  const TH = 48;
+  ticker.width = TW;
+  ticker.height = TH;
+  const tctx = ticker.getContext('2d');
+
+  const CENTER = TW / 2;
+  const CHAR_W = 14;
+
+  // Binary columns — flicker in place on the left zone
+  const leftCols = Math.floor((CENTER - 20) / CHAR_W);
+  const binaryCols = Array.from({length: leftCols}, () => ({
+    ch: Math.random() > 0.5 ? '1' : '0',
+    timer: Math.random() * 0.3,
+    speed: 0.08 + Math.random() * 0.18
+  }));
+
+  function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+  function easeOut3(t) { return 1 - Math.pow(1-t, 3); }
+  function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+
+  // Timing
+  const WHEEL_APPEAR   = 0.5;
+  const TICKER_START   = 1.2;
+  const SWEEP_DURATION = 2.2;  // Binary sweeps in from left over this time
+  const TURN_DURATION  = 2.8;
+  const WORD_DELAY     = 0.6;
+
+  let sweepProgress  = 0;
+  let wheelTriggerTime = null;
+  let wordRevealStart  = null;
+  let wordRevealProgress = 0;
+  let binaryFrozen = false;
+
+  let helmScale = 0, helmRotZ = 0, helmRotY = 0;
+  let startTime = null, lastTime = null;
+
+  function animate(timestamp) {
+    requestAnimationFrame(animate);
+    if (!startTime) startTime = timestamp;
+    const elapsed = (timestamp - startTime) / 1000;
+    const dt = lastTime ? (timestamp - lastTime) / 1000 : 0.016;
+    lastTime = timestamp;
+
+    // ---- HELM ----
+    if (elapsed >= WHEEL_APPEAR) {
+      helmScale = easeOut3(clamp01((elapsed - WHEEL_APPEAR) / 1.0));
+    }
+    if (wheelTriggerTime) {
+      const s = elapsed - wheelTriggerTime;
+      helmRotZ = easeInOut(clamp01(s / (TURN_DURATION * 0.55))) * -0.44;
+    }
+    helm.scale.setScalar(helmScale);
+    helm.rotation.z = helmRotZ;
+    helm.rotation.y = 0;
+    renderer.render(scene, camera);
+
+    // ---- TICKER ----
+    tctx.clearRect(0, 0, TW, TH);
+    tctx.fillStyle = 'rgba(13,32,64,0.6)';
+    tctx.fillRect(0, 0, TW, TH);
+    tctx.strokeStyle = 'rgba(0,200,240,0.2)';
+    tctx.lineWidth = 1;
+    tctx.beginPath(); tctx.moveTo(0,0); tctx.lineTo(TW,0); tctx.stroke();
+    tctx.beginPath(); tctx.moveTo(0,TH); tctx.lineTo(TW,TH); tctx.stroke();
+
+    if (elapsed >= TICKER_START) {
+      tctx.font = `bold 13px ${FONT_MONO}`;
+
+      // Sweep: binary fills left zone from left edge to center
+      const sweepT = clamp01((elapsed - TICKER_START) / SWEEP_DURATION);
+      sweepProgress = Math.floor(easeOut3(sweepT) * leftCols);
+
+      // Trigger wheel when sweep reaches center
+      if (!wheelTriggerTime && sweepProgress >= leftCols) {
+        wheelTriggerTime = elapsed;
+        wordRevealStart  = elapsed + WORD_DELAY;
+      }
+
+      // Freeze binary when tagline complete
+      if (wordRevealProgress >= TAGLINE.length) {
+        binaryFrozen = true;
+      }
+
+      // Update flickering (only while not frozen)
+      if (!binaryFrozen) {
+        binaryCols.forEach(col => {
+          col.timer -= dt;
+          if (col.timer <= 0) {
+            col.ch = Math.random() > 0.5 ? '1' : '0';
+            col.timer = col.speed;
+          }
+        });
+      }
+
+      // Draw binary left zone
+      for (let i = 0; i < sweepProgress; i++) {
+        const col = binaryCols[i];
+        const charX = i * CHAR_W;
+        const distFromEdge = sweepProgress - i;
+        let alpha;
+        if (!wheelTriggerTime) {
+          // Still sweeping — leading edge bright white
+          if (distFromEdge < 2) alpha = 1.0;
+          else if (distFromEdge < 5) alpha = 0.7;
+          else alpha = 0.35;
+        } else {
+          alpha = binaryFrozen ? 0.18 : 0.35;
+        }
+        tctx.fillStyle = (!wheelTriggerTime && distFromEdge < 2)
+          ? `rgba(255,255,255,${alpha})`
+          : `rgba(0,200,240,${alpha})`;
+        tctx.fillText(col.ch, charX + 4, TH/2 + 5);
+      }
+
+      // Center glow when wheel triggers
+      if (wheelTriggerTime) {
+        const ga = clamp01((elapsed - wheelTriggerTime) / 0.5) *
+                   (1 - clamp01((elapsed - wheelTriggerTime - 1.2) / 0.8));
+        if (ga > 0.01) {
+          const grad = tctx.createRadialGradient(CENTER, TH/2, 0, CENTER, TH/2, 60);
+          grad.addColorStop(0, `rgba(0,200,240,${ga * 0.5})`);
+          grad.addColorStop(1, 'rgba(0,200,240,0)');
+          tctx.fillStyle = grad;
+          tctx.fillRect(CENTER - 60, 0, 120, TH);
+        }
+      }
+
+      // Word reveal — gold text types in from right of center
+      if (wordRevealStart && elapsed >= wordRevealStart) {
+        const wordT = clamp01((elapsed - wordRevealStart) / 6.0);
+        wordRevealProgress = Math.floor(easeOut3(wordT) * TAGLINE.length);
+        const visibleText = TAGLINE.substring(0, wordRevealProgress);
+
+        tctx.shadowColor = '#FFB800';
+        tctx.shadowBlur = 6;
+        tctx.fillStyle = '#FFB800';
+        tctx.fillText(visibleText, CENTER + 20, TH/2 + 5);
+        tctx.shadowBlur = 0;
+
+        // Blinking cursor
+        if (wordRevealProgress < TAGLINE.length && Math.floor(elapsed * 2) % 2 === 0) {
+          const tw = tctx.measureText(visibleText).width;
+          tctx.fillStyle = '#00C8F0';
+          tctx.fillRect(CENTER + 22 + tw, TH/2 - 9, 2, 13);
+        }
+      }
+    }
+  }
+
+  requestAnimationFrame(animate);
+
+  window.addEventListener('resize', () => {
+    ticker.width = ticker.offsetWidth;
+    ticker.height = TH;
+  });
+
+})();
+</script>
+</body>
+</html>
