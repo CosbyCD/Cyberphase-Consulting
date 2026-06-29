@@ -30,7 +30,7 @@
 
   .hero {
     min-height:100vh; display:flex; flex-direction:column;
-    padding:1.5rem 3rem 1.5rem; position:relative; overflow:hidden; justify-content:flex-start; padding-top:12vh;
+    padding:1.5rem 3rem 1.5rem; position:relative; overflow:hidden; justify-content:flex-start; padding-top:4vh;
   }
 
   /* BRAND — always visible */
@@ -93,8 +93,8 @@
   /* MIC BLOCK — slides down when map opens */
   .mic-block {
     text-align:center; width:100%; max-width:680px;
-    align-self:center; padding-top:0.8rem; padding-bottom:0.5rem;
-    margin-top:0.8rem;
+    align-self:center; padding-top:0; padding-bottom:0;
+    margin-top:0;
     transition:transform 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease;
     flex-shrink:0;
   }
@@ -103,8 +103,8 @@
     opacity:0;
     pointer-events:none;
   }
-  .mic1 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1rem,1.6vw,1.3rem); color:var(--white-dim); line-height:1.9; margin-bottom:0.5rem; }
-  .mic2 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1rem,1.6vw,1.3rem); color:var(--gold); line-height:1.9; margin-bottom:1rem; }
+  .mic1 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.45rem); color:var(--white); line-height:1.9; margin-bottom:0.5rem; }
+  .mic2 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.45rem); color:var(--gold); line-height:1.9; margin-bottom:1rem; }
   .disc { font-family:'Inter',sans-serif; font-size:clamp(0.68rem,0.95vw,0.8rem); font-weight:300; color:var(--white-dim); letter-spacing:0.08em; }
 
   /* NODE MAP — expands to fill space */
@@ -155,8 +155,6 @@
   .detail-evidence-item { font-family:'Inter',sans-serif; font-size:0.82rem; color:var(--white-dim); line-height:1.6; padding-left:1rem; border-left:1px solid var(--gold-dim); margin-bottom:0.5rem; }
 
 
-  /* PORTFOLIO LINKS fixed bottom right */
-  .portfolio-links { position:fixed; bottom:1.8rem; right:2.2rem; display:flex; flex-direction:row; align-items:center; gap:1.2rem; z-index:50; }
   .portfolio-link { display:flex; flex-direction:column; align-items:center; gap:0.3rem; text-decoration:none; opacity:0.3; transition:opacity 0.3s ease; }
   .portfolio-link:hover { opacity:0.78; }
   .portfolio-link svg { width:24px; height:24px; fill:var(--white); }
@@ -220,9 +218,9 @@
       <circle cx="8" cy="38" r="2.2" fill="#c9a84c"/>
     </svg>CyberPhase Consulting</a>
   <div class="nav-links">
-    <a href="index.html" class="active">What We Do</a>
-    <a href="clients.html">What We've Done</a>
-    <a href="about.html">Who We Are</a>
+    <a href="clients.html">What I've Done</a>
+    <a href="index.html" class="active">How I Do It</a>
+    <a href="about.html">Who I Am</a>
     <a href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener">Contact</a>
   </div>
 </nav>
@@ -263,7 +261,6 @@
   <div class="mic-block" id="micBlock">
     <p class="mic1">Michelangelo saw the angel in the marble and carved until he set him free.</p>
     <p class="mic2">I see the information in the data and carve it free.</p>
-    <p class="disc">The industries and tools change. The discipline doesn't.</p>
   </div>
 
   <!-- NODE MAP: fills screen when open -->
@@ -310,40 +307,31 @@
     </div>
   </div>
 
-</section>
-
-<!-- PORTFOLIO LINKS: fixed bottom right -->
-<div class="portfolio-links">
-  <a class="portfolio-link" href="https://github.com/cdcosby" target="_blank" rel="noopener" title="GitHub Portfolio">
-    <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
-    <span>GitHub</span>
-  </a>
-  <a class="portfolio-link tableau-link" href="https://public.tableau.com/app/profile/cdcosby/viz/CyclisticBikeShareAnalysisRidershipPatternsConversionInsights/CyclisticBikeSharePhase2Analysis" target="_blank" rel="noopener" title="Tableau Public">
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-      <path d="M15 6h2v6h6v2h-6v6h-2v-6H9v-2h6z"/>
-      <path d="M22 2h2v4h4v2h-4v4h-2V8h-4V6h4zM8 2h2v4h4v2h-4v4H8V8H4V6h4zM22 20h2v4h4v2h-4v4h-2v-4h-4v-2h4zM8 20h2v4h4v2h-4v4H8v-4H4v-2h4z"/>
-    </svg>
-    <span>Tableau</span>
-  </a>
-  <a class="portfolio-link" href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener" title="LinkedIn">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-    </svg>
-    <span>LinkedIn</span>
-  </a>
-</div>
-
-<!-- CLOSING -->
-<section class="closing">
-  <p class="closing-quote">The dataset tells you what.<br>The enrichment tells you why.<br>The analysis tells you how.</p>
-  <p class="closing-identity">I find the signal in the noise.</p>
-  <p class="closing-tagline">$150/hr · 4-hour minimum · 100% remote · US-based</p>
-  <div class="cta-row">
-    <a class="cta-primary" href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener">Start the conversation</a>
-    <a class="cta-secondary" href="about.html">About CyberPhase</a>
+<!-- SIGNAL + LINKS -->
+<div style="text-align:center; padding:0.3rem 2rem 1.5rem;">
+  <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.45rem); color:var(--white); line-height:1.9; margin-bottom:0.2rem;">The dataset tells you what.</p>
+  <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.45rem); color:var(--white); line-height:1.9; margin-bottom:0.2rem;">The enrichment tells you why.</p>
+  <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.45rem); color:var(--white); line-height:1.9; margin-bottom:0.2rem;">The analysis tells you how.</p>
+  <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.2rem,2vw,1.6rem); color:var(--gold); margin-bottom:0.8rem; margin-top:1.2rem;">I find the signal in the noise.</p>
+  <p style="font-family:'Inter',sans-serif; font-size:clamp(0.72rem,1vw,0.85rem); font-weight:300; color:rgba(240,244,248,0.6); letter-spacing:0.07em; margin-bottom:1.5rem;">The industries and tools change. The discipline doesn't.</p>
+  <div style="display:flex; gap:2rem; justify-content:center; align-items:center;">
+    <a href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.3rem; text-decoration:none; opacity:0.6; transition:opacity 0.3s ease;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#00d4c8" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      <span style="font-family:'Space Mono',monospace; font-size:0.46rem; letter-spacing:0.1em; color:rgba(240,244,248,0.5);">LinkedIn</span>
+    </a>
+    <a href="https://github.com/cdcosby" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.3rem; text-decoration:none; opacity:0.6; transition:opacity 0.3s ease;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+      <svg width="24" height="24" viewBox="0 0 98 96" fill="#00d4c8" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
+      <span style="font-family:'Space Mono',monospace; font-size:0.46rem; letter-spacing:0.1em; color:rgba(240,244,248,0.5);">GitHub</span>
+    </a>
+    <a href="https://public.tableau.com/app/profile/cdcosby" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.3rem; text-decoration:none; opacity:0.6; transition:opacity 0.3s ease;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+      <svg width="24" height="24" viewBox="0 0 32 32" fill="#c9a84c" xmlns="http://www.w3.org/2000/svg"><path d="M15 6h2v6h6v2h-6v6h-2v-6H9v-2h6z"/><path d="M22 2h2v4h4v2h-4v4h-2V8h-4V6h4zM8 2h2v4h4v2h-4v4H8V8H4V6h4zM22 20h2v4h4v2h-4v4h-2v-4h-4v-2h4zM8 20h2v4h4v2h-4v4H8v-4H4v-2h4z"/></svg>
+      <span style="font-family:'Space Mono',monospace; font-size:0.46rem; letter-spacing:0.1em; color:rgba(240,244,248,0.5);">Tableau</span>
+    </a>
   </div>
-  <p class="closing-footer">CyberPhase Consulting &nbsp;·&nbsp; Founded 1983 by George Douglas Cosby &nbsp;·&nbsp; Revived 2024</p>
+
 </section>
+
+</div>
 
 <script>
 // MATRIX

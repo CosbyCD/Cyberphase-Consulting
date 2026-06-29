@@ -24,18 +24,18 @@
   .nav-links a:hover, .nav-links a.active { color:var(--aqua); }
 
   /* HERO */
-  .page-hero { padding:3rem 3.5rem 2.5rem; max-width:960px; margin:0 auto; text-align:center; border-bottom:1px solid rgba(240,244,248,0.05); }
+  .page-hero { padding:1.5rem 3.5rem 1rem; max-width:960px; margin:0 auto; text-align:center; border-bottom:1px solid rgba(240,244,248,0.05); }
   .page-eyebrow { font-family:'Space Mono',monospace; font-size:0.58rem; letter-spacing:0.25em; color:var(--aqua); text-transform:uppercase; margin-bottom:1.5rem; display:block; }
   .page-title { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(1.8rem,3.5vw,3rem); color:var(--white); line-height:1.15; margin-bottom:2rem; }
 
   /* METHODOLOGY */
-  .methodology { padding:2rem 3.5rem 2.5rem; max-width:960px; margin:0 auto; text-align:center; border-bottom:1px solid rgba(240,244,248,0.05); }
+  .methodology { padding:0.8rem 3.5rem 1rem; max-width:960px; margin:0 auto; text-align:center; border-bottom:1px solid rgba(240,244,248,0.05); }
   .method-label { font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.22em; color:rgba(240,244,248,0.3); text-transform:uppercase; margin-bottom:1rem; display:block; }
   .method-statement { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.2rem,2.2vw,1.8rem); color:var(--white); line-height:1.7; max-width:780px; margin:0 auto; }
   .method-statement em { color:var(--gold); font-style:normal; }
 
   /* ── CAROUSEL ── */
-  .carousel-section { padding:3rem 0 4rem; position:relative; }
+  .carousel-section { padding:1rem 0 2rem; position:relative; }
 
   .carousel-nav {
     display:flex; align-items:center; justify-content:center;
@@ -50,13 +50,7 @@
   }
   .carousel-arrow:hover { border-color:var(--aqua); color:var(--aqua); }
   .carousel-arrow:disabled { opacity:0.25; cursor:default; }
-  .carousel-dots { display:flex; gap:0.5rem; align-items:center; }
-  .carousel-dot {
-    width:6px; height:6px; border-radius:50%;
-    background:rgba(240,244,248,0.2); border:none; cursor:pointer;
-    transition:all 0.25s ease; padding:0;
-  }
-  .carousel-dot.active { background:var(--aqua); transform:scale(1.3); }
+
 
   .carousel-track-wrap { overflow:hidden; }
   .carousel-track {
@@ -75,7 +69,7 @@
 
   /* CASE CARD */
   .case-card {
-    background:var(--white-ghost);
+    background:rgba(240,244,248,0.08);
     border:1px solid rgba(240,244,248,0.07);
     border-radius:6px;
     padding:2rem 2rem 1.5rem;
@@ -84,12 +78,23 @@
     transition:border-color 0.3s ease;
   }
   .case-card:hover { border-color:rgba(0,212,200,0.2); }
+  .case-card.hidden-card {
+    opacity:0; pointer-events:none;
+    transition:opacity 0.3s ease;
+    visibility:hidden;
+    position:absolute;
+    width:0; height:0; overflow:hidden;
+    margin:0; padding:0; border:none;
+  }
+  .case-card.expanded {
+    grid-column: 1 / -1;
+  }
   .case-card.expanded { border-color:rgba(0,212,200,0.3); }
 
   .card-eyebrow { font-family:'Space Mono',monospace; font-size:0.52rem; letter-spacing:0.18em; color:rgba(240,244,248,0.3); text-transform:uppercase; margin-bottom:0.8rem; }
   .card-number { font-family:'DM Sans',sans-serif; font-weight:600; font-size:clamp(2rem,3.5vw,3rem); color:var(--gold); line-height:1; margin-bottom:0.3rem; }
   .card-number-label { font-family:'Space Mono',monospace; font-size:0.48rem; letter-spacing:0.12em; color:rgba(240,244,248,0.3); text-transform:uppercase; margin-bottom:1.2rem; }
-  .card-title { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.5rem); color:var(--white); line-height:1.3; margin-bottom:1.5rem; }
+  .card-title { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.5rem); color:var(--white); line-height:1.3; margin-bottom:1.5rem; opacity:1; }
 
   /* EXPAND TOGGLE */
   .card-toggle {
@@ -108,10 +113,10 @@
   .case-card.expanded .case-detail { display:block; }
 
   .phases { display:flex; flex-direction:column; gap:1.5rem; margin-bottom:1.5rem; }
-  .phase { border-top:1px solid rgba(240,244,248,0.06); padding-top:1.2rem; }
-  .phase-label { font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.15em; color:var(--aqua); text-transform:uppercase; margin-bottom:0.5rem; }
-  .phase-heading { font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.8rem; color:var(--white); margin-bottom:0.5rem; }
-  .phase-body { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(0.88rem,1.2vw,1rem); color:var(--white-dim); line-height:1.75; }
+  .phase { border-top:1px solid rgba(240,244,248,0.12); padding-top:1.4rem; margin-bottom:0.5rem; }
+  .phase-label { font-family:'Space Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; color:var(--white); text-transform:uppercase; margin-bottom:0.5rem; font-weight:500; }
+  .phase-heading { font-family:'DM Sans',sans-serif; font-weight:600; font-size:clamp(1rem,1.6vw,1.25rem); color:var(--aqua); margin-bottom:0.6rem; letter-spacing:0.01em; }
+  .phase-body { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(1.05rem,1.6vw,1.25rem); color:rgba(240,244,248,0.95); line-height:1.9; }
   .phase-body em { color:var(--gold); font-style:italic; }
   .phase-body strong { color:var(--white); font-weight:400; }
   .phase-body + .phase-body { margin-top:0.6rem; }
@@ -140,6 +145,23 @@
   .footer-links { display:flex; gap:1.5rem; }
   .footer-links a { font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; color:rgba(240,244,248,0.28); text-decoration:none; transition:color 0.2s ease; }
   .footer-links a:hover { color:var(--aqua); }
+
+  .cta-card { justify-content:space-between; }
+  .cta-card .card-title {
+    font-size:clamp(1.1rem,1.7vw,1.3rem) !important;
+    font-weight:400 !important;
+    color:var(--white) !important;
+    opacity:1 !important;
+  }
+  .card-cta-btn {
+    font-family:'Space Mono',monospace; font-size:0.62rem;
+    letter-spacing:0.15em; text-transform:uppercase;
+    color:var(--navy); background:var(--gold);
+    border:none; padding:0.8rem 1.5rem;
+    text-decoration:none; display:inline-block;
+    transition:all 0.3s ease; margin-top:auto;
+  }
+  .card-cta-btn:hover { background:#e0bc6a; transform:translateY(-1px); }
 
   @media(max-width:900px){
     .slide-columns { grid-template-columns:1fr; gap:2rem; }
@@ -188,16 +210,16 @@
     CyberPhase Consulting
   </a>
   <div class="nav-links">
-    <a href="index.html">What We Do</a>
-    <a href="clients.html" class="active">What We've Done</a>
-    <a href="about.html">Who We Are</a>
+    <a href="index.html">How I Do It</a>
+    <a href="clients.html" class="active">What I've Done</a>
+    <a href="about.html">Who I Am</a>
     <a href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener">Contact</a>
   </div>
 </nav>
 
 <div class="page-hero">
   <span class="page-eyebrow">Client Engagements</span>
-  <h1 class="page-title">What happens when CyberPhase<br>walks into your operation.</h1>
+  <h1 class="page-title">What happens when I<br>walk into your operation.</h1>
 </div>
 
 <div class="methodology">
@@ -213,7 +235,7 @@
 <div class="carousel-section">
   <div class="carousel-nav">
     <button class="carousel-arrow" id="prevBtn" onclick="moveCarousel(-1)" disabled>&#8592;</button>
-    <div class="carousel-dots" id="carouselDots"></div>
+    <span style="font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.15em;color:rgba(240,244,248,0.25);" id="slideLabel">01 / 02</span>
     <button class="carousel-arrow" id="nextBtn" onclick="moveCarousel(1)">&#8594;</button>
   </div>
 
@@ -229,7 +251,7 @@
             <div class="card-eyebrow">Client A · Hospitality · Houston, TX</div>
             <div class="card-number">$600K+</div>
             <div class="card-number-label">Gross revenue increase · one unit · $2M+ per unit · two locations</div>
-            <h2 class="card-title">A 42-year-old institution that had never advertised.<br>We changed that. The numbers followed.</h2>
+            <h2 class="card-title">A 42-year-old institution that had never advertised.<br>I changed that. The numbers followed.</h2>
             <button class="card-toggle" onclick="toggleCard('cardA')">
               <span>Read the full engagement</span>
               <span class="toggle-icon">&#8964;</span>
@@ -255,8 +277,8 @@
                 <div class="phase">
                   <div class="phase-label">Phase 4 · Culture &amp; Operations</div>
                   <p class="phase-heading">Engagement, punctuality, and sales training built into the daily routine.</p>
-                  <p class="phase-body">After the lunch rush, cooks came into the office, sat down, and ate together. <em>Do you have something you'd like to make for next week's special?</em> Specials rotated every Tuesday. The cooks drove the ideas. Every Tuesday morning, fifteen minutes before service, the whole kitchen made the weekly special and everyone tasted it — the bartender sommelier recommended a wine pairing. Staff went onto the floor knowing exactly what they were selling. That's not a tasting. That's a sales meeting.</p>
-                  <p class="phase-body">Every morning I cooked breakfast for the staff. <strong>If you wanted breakfast, you had to be there early.</strong> Punctuality solved through culture, not discipline. Any time a menu item changed, every server tasted it. New servers tasted the entire menu before their first shift. <em>You can't sell what you haven't experienced.</em></p>
+                  <p class="phase-body">I created a space for the cooks to come into my office after the lunch rush — sit down, eat together, decompress. <em>Do you have something you'd like to make for next week's special?</em> Specials rotated every Tuesday. The cooks drove the ideas. Every Tuesday morning, fifteen minutes before service, the whole kitchen made the weekly special and everyone tasted it — the bartender sommelier recommended a wine pairing. Staff went onto the floor knowing exactly what they were selling. That's not a tasting. That's a sales meeting.</p>
+                  <p class="phase-body">Every Friday morning I cooked breakfast for the staff — pancakes, sausage, bacon, sometimes barbacoa and breakfast tacos. <strong>If you wanted Friday breakfast, you had to be there early.</strong> Punctuality solved through culture, not discipline. They loved the pancakes. Any time a menu item changed, every server tasted it. New servers tasted the entire menu before their first shift. <em>You can't sell what you haven't experienced.</em></p>
                 </div>
               </div>
             </div>
@@ -264,10 +286,10 @@
 
           <!-- CLIENT B -->
           <div class="case-card" id="cardB">
-            <div class="card-eyebrow">Client B · Private Household · Ongoing</div>
-            <div class="card-number">$18K+</div>
+            <div class="card-eyebrow">Client B · Private Estate · 18 Years</div>
+            <div class="card-number">$324K+</div>
             <div class="card-number-label">Annual savings · vendor restructure + facilities &amp; infrastructure rebuild</div>
-            <h2 class="card-title">Financial management, facilities audit,<br>and infrastructure rebuild.</h2>
+            <h2 class="card-title">Full estate management — financial, operational, and infrastructure — for eighteen years.</h2>
             <button class="card-toggle" onclick="toggleCard('cardB')">
               <span>Read the full engagement</span>
               <span class="toggle-icon">&#8964;</span>
@@ -277,12 +299,12 @@
                 <div class="phase">
                   <div class="phase-label">Engagement · Financial &amp; Vendor Audit</div>
                   <p class="phase-heading">Read the system. Find where value is being lost.</p>
-                  <p class="phase-body">Took over financial management for a private household. Audited existing vendor relationships — every service, every contract, every recurring cost. Evaluated service quality against actual cost. Identified where equivalent or better service was available at lower cost. Restructured the vendor portfolio. <em>$18,000+ saved annually</em> — without sacrificing service quality.</p>
+                  <p class="phase-body">Took over financial management for a private household. Audited existing vendor relationships — every service, every contract, every recurring cost. Evaluated service quality against actual cost. Identified where equivalent or better service was available at lower cost. Restructured the vendor portfolio. <em>$18,000+ saved annually — $324,000+ over the engagement</em> — without sacrificing service quality.</p>
                 </div>
                 <div class="phase">
-                  <div class="phase-label">Facilities Audit &amp; Compliance</div>
-                  <p class="phase-heading">Fix the foundation first.</p>
-                  <p class="phase-body">Audited the physical plant. Found an exterior electrical panel that was out of code. Had it replaced along with interior electrical issues. Had the house completely reclad in HardiBoard. <strong>Safety and compliance before anything else.</strong></p>
+                  <div class="phase-label">Facilities &amp; Property Management</div>
+                  <p class="phase-heading">Responsible for all maintenance of the property.</p>
+                  <p class="phase-body">Full responsibility for property maintenance including landscaping and all physical plant. The house was built in 1974 — due to its age, it was time to reclad and paint the exterior. Had the house completely reclad in HardiBoard. The original electrical was designed for 1974 load requirements — modern living demands far more outlets and capacity. Had the electrical system upgraded throughout to compensate. Found an exterior panel that was out of code and had it replaced. <strong>Stewardship decisions, not crisis response.</strong></p>
                 </div>
                 <div class="phase">
                   <div class="phase-label">Infrastructure Engineering</div>
@@ -298,15 +320,24 @@
       </div>
       <!-- END SLIDE 1 -->
 
-      <!-- SLIDE 2 PLACEHOLDER: future clients -->
+      <!-- SLIDE 2: CTA cards -->
       <div class="carousel-slide">
         <div class="slide-columns">
-          <div class="case-card placeholder">
-            <p class="placeholder-text">Next engagement<br>coming soon.</p>
+
+          <div class="case-card cta-card">
+            <div class="card-eyebrow">Your Organization</div>
+            <div class="card-number" style="font-size:clamp(1.4rem,2.5vw,2rem);margin-bottom:0.8rem;">Picture your<br>data here.</div>
+            <p class="card-title" style="font-size:clamp(0.95rem,1.4vw,1.1rem);font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--white-dim);line-height:1.75;margin-bottom:1.5rem;">Your data is trying to tell you something. But it's hard to find the signal when you're in a blizzard of data. I go in, read the system, and model your data into a three-dimensional nodal structure. Rotate it. Examine it from every angle. That's how the outliers surface — and that's where your data actually lives. Not only the what, but the why, the how, the fix — and how to apply that knowledge.</p>
+            <a class="card-cta-btn" href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener">Start the conversation</a>
           </div>
-          <div class="case-card placeholder">
-            <p class="placeholder-text">Next engagement<br>coming soon.</p>
+
+          <div class="case-card cta-card">
+            <div class="card-eyebrow">Your Outcomes</div>
+            <div class="card-number" style="font-size:clamp(1.4rem,2.5vw,2rem);margin-bottom:0.8rem;">Your data.<br>Your outcomes.<br>Your numbers.</div>
+            <p class="card-title" style="font-size:clamp(0.95rem,1.4vw,1.1rem);font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--white-dim);line-height:1.75;margin-bottom:1.5rem;">The methodology works in any industry. Hospitality. Energy. Healthcare. Financial services. The tools change. The discipline doesn't. What I find in your data depends on what's there — and there's always more than anyone expected.</p>
+            <a class="card-cta-btn" href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener">Let's talk</a>
           </div>
+
         </div>
       </div>
 
@@ -323,7 +354,7 @@
 </div>
 
 <footer>
-  <span class="footer-brand">CyberPhase Consulting · Founded 1983 by George Douglas Wise Cosby · Revived 2024</span>
+  <span class="footer-brand">CyberPhase Consulting · Founded 1983 by George Douglas Cosby · Revived 2024</span>
   <div class="footer-links">
     <a href="https://github.com/cdcosby" target="_blank" rel="noopener">GitHub</a>
     <a href="https://public.tableau.com/app/profile/cdcosby" target="_blank" rel="noopener">Tableau</a>
@@ -339,21 +370,10 @@ const slides = track.querySelectorAll('.carousel-slide');
 const totalSlides = slides.length;
 let current = 0;
 
-// Build dots
-const dotsContainer = document.getElementById('carouselDots');
-slides.forEach((_, i) => {
-  const dot = document.createElement('button');
-  dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-  dot.onclick = () => goToSlide(i);
-  dotsContainer.appendChild(dot);
-});
-
 function goToSlide(n) {
   current = n;
   track.style.transform = `translateX(-${current * 100}%)`;
-  document.querySelectorAll('.carousel-dot').forEach((d, i) => {
-    d.classList.toggle('active', i === current);
-  });
+  document.getElementById('slideLabel').textContent = `0${current+1} / 0${totalSlides}`;
   document.getElementById('prevBtn').disabled = current === 0;
   document.getElementById('nextBtn').disabled = current === totalSlides - 1;
 }
@@ -365,7 +385,22 @@ function moveCarousel(dir) {
 // ── CARD EXPAND/COLLAPSE ──
 function toggleCard(id) {
   const card = document.getElementById(id);
-  card.classList.toggle('expanded');
+  const isExpanding = !card.classList.contains('expanded');
+  
+  // Find the slide-columns container and the other card
+  const col = card.closest('.slide-columns');
+  const allCards = col.querySelectorAll('.case-card:not(.cta-card):not(.placeholder)');
+  
+  if (isExpanding) {
+    card.classList.add('expanded');
+    allCards.forEach(c => {
+      if (c !== card) c.classList.add('hidden-card');
+    });
+  } else {
+    card.classList.remove('expanded');
+    allCards.forEach(c => c.classList.remove('hidden-card'));
+  }
+  
   const btn = card.querySelector('.card-toggle span:first-child');
   btn.textContent = card.classList.contains('expanded') ? 'Close' : 'Read the full engagement';
 }
