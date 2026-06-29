@@ -3,192 +3,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CyberPhase Consulting</title>
+<title>Client Work — CyberPhase Consulting</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&family=Space+Mono:wght@400&display=swap');
   *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
   :root {
     --navy:#0a1628; --deep-navy:#060e1a;
-    --aqua:#00d4c8; --aqua-dim:rgba(0,212,200,0.15); --aqua-glow:rgba(0,212,200,0.4);
-    --gold:#c9a84c; --gold-dim:rgba(201,168,76,0.2);
-    --white:#f0f4f8; --white-dim:rgba(240,244,248,0.6);
-    --white-ghost:rgba(240,244,248,0.08);
+    --aqua:#00d4c8; --aqua-dim:rgba(0,212,200,0.12);
+    --gold:#c9a84c; --gold-dim:rgba(201,168,76,0.15);
+    --white:#f0f4f8; --white-dim:rgba(240,244,248,0.65);
+    --white-ghost:rgba(240,244,248,0.06);
   }
+  html,body { width:100%; min-height:100vh; background:var(--deep-navy); color:var(--white); font-family:'Inter',sans-serif; overflow-x:hidden; }
+
   /* NAV */
-  nav {
-    display:flex; align-items:center; justify-content:space-between;
-    padding:1.2rem 3rem;
-    border-bottom:1px solid rgba(240,244,248,0.05);
-    position:sticky; top:0; background:var(--deep-navy); z-index:100;
-  }
+  nav { display:flex; align-items:center; justify-content:space-between; padding:1.5rem 3.5rem; border-bottom:1px solid rgba(240,244,248,0.05); position:sticky; top:0; background:var(--deep-navy); z-index:100; }
   .nav-brand { font-family:'DM Sans',sans-serif; font-weight:500; font-size:0.9rem; color:var(--aqua); letter-spacing:0.05em; text-decoration:none; display:flex; align-items:center; }
   .nav-links { display:flex; gap:2rem; }
   .nav-links a { font-family:'Space Mono',monospace; font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white-dim); text-decoration:none; transition:color 0.2s ease; }
   .nav-links a:hover, .nav-links a.active { color:var(--aqua); }
 
-  html,body { width:100%; min-height:100vh; background:var(--deep-navy); color:var(--white); font-family:'Inter',sans-serif; overflow-x:hidden; }
+  /* HERO */
+  .page-hero { padding:1.5rem 3.5rem 1rem; max-width:960px; margin:0 auto; text-align:center; border-bottom:1px solid rgba(240,244,248,0.05); }
+  .page-eyebrow { font-family:'Space Mono',monospace; font-size:0.58rem; letter-spacing:0.25em; color:var(--aqua); text-transform:uppercase; margin-bottom:1.5rem; display:block; }
+  .page-title { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(1.8rem,3.5vw,3rem); color:var(--white); line-height:1.15; margin-bottom:2rem; }
 
-  .hero {
-    min-height:100vh; display:flex; flex-direction:column;
-    padding:1.5rem 3rem 1.5rem; position:relative; overflow:hidden; justify-content:flex-start; padding-top:4vh;
-  }
+  /* METHODOLOGY */
+  .methodology { padding:0.8rem 3.5rem 1rem; max-width:960px; margin:0 auto; text-align:center; border-bottom:1px solid rgba(240,244,248,0.05); }
+  .method-label { font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.22em; color:rgba(240,244,248,0.3); text-transform:uppercase; margin-bottom:1rem; display:block; }
+  .method-statement { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.2rem,2.2vw,1.8rem); color:var(--white); line-height:1.7; max-width:780px; margin:0 auto; }
+  .method-statement em { color:var(--gold); font-style:normal; }
 
-  /* BRAND — always visible */
-  .brand {
-    font-family:'DM Sans',sans-serif; font-weight:500;
-    font-size:clamp(0.9rem,1.4vw,1.2rem);
-    color:var(--aqua); letter-spacing:0.05em;
-    line-height:1; align-self:flex-start;
-    position:relative; z-index:20;
-    flex-shrink:0;
-  }
+  /* ── CAROUSEL ── */
+  .carousel-section { padding:1rem 0 2rem; position:relative; }
 
-  /* CENTER ROW — slides out when map opens */
-  .center-row {
+  .carousel-nav {
     display:flex; align-items:center; justify-content:center;
-    gap:0; margin-top:0; margin-bottom:0;
-    transition:transform 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease;
-    flex-shrink:0;
+    gap:1.5rem; margin-bottom:2rem;
   }
-  .center-row.slide-out {
-    transform:translateX(-110vw);
-    opacity:0;
-    pointer-events:none;
+  .carousel-arrow {
+    background:none; border:1px solid rgba(240,244,248,0.15);
+    color:var(--white-dim); width:38px; height:38px;
+    border-radius:50%; cursor:pointer; font-size:1rem;
+    display:flex; align-items:center; justify-content:center;
+    transition:all 0.25s ease; flex-shrink:0;
+  }
+  .carousel-arrow:hover { border-color:var(--aqua); color:var(--aqua); }
+  .carousel-arrow:disabled { opacity:0.25; cursor:default; }
+
+
+  .carousel-track-wrap { overflow:hidden; }
+  .carousel-track {
+    display:flex; transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .carousel-slide {
+    min-width:100%; padding:0 3.5rem;
   }
 
-  .matrix-wrap {
-    position:relative; width:620px; height:168px;
-    flex-shrink:0; overflow:hidden; border-radius:2px;
-  }
-  #matrixCanvas { position:absolute; top:0; left:0; width:100%; height:100%; }
-  .chaos-label {
-    position:absolute; inset:0; display:flex;
-    align-items:center; justify-content:flex-end; padding-right:1rem;
-    font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300;
-    font-size:clamp(2rem,3.2vw,2.8rem); color:var(--white);
-    text-shadow:0 0 16px rgba(0,0,0,1), 0 0 32px rgba(0,0,0,0.95);
-    pointer-events:none; z-index:5; white-space:nowrap;
-  }
-  .outcomes-line {
-    font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300;
-    font-size:clamp(2rem,3.2vw,2.8rem); color:var(--gold);
-    white-space:nowrap; padding-left:0.3rem; line-height:1; flex-shrink:0;
+  /* TWO COLUMN INSIDE SLIDE */
+  .slide-columns {
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:4rem; align-items:start; align-content:start;
+    max-width:1300px; margin:0 auto;
   }
 
-  /* TEASER NODE */
-  .teaser-wrap { display:flex; align-items:center; margin-left:1.2rem; flex-shrink:0; }
-  .teaser-wrap.hidden { display:none; }
-  .teaser-node { width:240px; height:240px; cursor:pointer; transition:transform 0.3s ease; }
-  .teaser-node:hover { transform:scale(1.04); }
-  .teaser-node svg { width:100%; height:100%; overflow:visible; }
-  .teaser-ring { animation:rotateSlow 20s linear infinite; transform-origin:95px 95px; }
-  @keyframes rotateSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-  @keyframes pulseGold {
-    0%,100%{filter:drop-shadow(0 0 10px rgba(201,168,76,0.35))}
-    50%{filter:drop-shadow(0 0 28px rgba(201,168,76,0.72))}
-  }
-  .teaser-center { animation:pulseGold 3.5s ease-in-out infinite; }
-  .teaser-node:hover .teaser-center { filter:drop-shadow(0 0 36px rgba(201,168,76,0.95)); }
-
-  /* MIC BLOCK — slides down when map opens */
-  .mic-block {
-    text-align:center; width:100%; max-width:680px;
-    align-self:center; padding-top:0; padding-bottom:0;
-    margin-top:0;
-    transition:transform 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease;
-    flex-shrink:0;
-  }
-  .mic-block.slide-out {
-    transform:translateY(120px);
-    opacity:0;
-    pointer-events:none;
-  }
-  .mic1 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.45rem); color:var(--white); line-height:1.9; margin-bottom:0.5rem; }
-  .mic2 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.45rem); color:var(--gold); line-height:1.9; margin-bottom:1rem; }
-  .disc { font-family:'Inter',sans-serif; font-size:clamp(0.68rem,0.95vw,0.8rem); font-weight:300; color:var(--white-dim); letter-spacing:0.08em; }
-
-  /* NODE MAP — expands to fill space */
-  .nodemap-section {
-    position:fixed; inset:0;
+  /* CASE CARD */
+  .case-card {
+    background:rgba(240,244,248,0.08);
+    border:1px solid rgba(240,244,248,0.07);
+    border-radius:6px;
+    padding:2rem 2rem 1.5rem;
     display:flex; flex-direction:column;
-    align-items:center; justify-content:flex-start;
-    padding:1rem 2rem 1rem;
+    cursor:pointer;
+    transition:border-color 0.3s ease;
+  }
+  .case-card:hover { border-color:rgba(0,212,200,0.2); }
+  .case-card.hidden-card {
     opacity:0; pointer-events:none;
-    transition:opacity 0.6s ease 0.4s;
-    z-index:10;
-    background:var(--deep-navy);
+    transition:opacity 0.3s ease;
+    visibility:hidden;
+    position:absolute;
+    width:0; height:0; overflow:hidden;
+    margin:0; padding:0; border:none;
   }
-  .nodemap-section.visible { opacity:1; pointer-events:all; }
-
-  #nodemap { width:100%; max-width:620px; height:440px; }
-
-  .node-center circle { fill:var(--navy); stroke:var(--gold); stroke-width:2; filter:drop-shadow(0 0 14px rgba(201,168,76,0.4)); cursor:pointer; transition:filter 0.3s ease; }
-  .node-center:hover circle { filter:drop-shadow(0 0 24px rgba(201,168,76,0.7)); }
-  .node-center text { fill:var(--gold); font-family:'Cormorant Garamond',serif; font-size:13px; font-style:italic; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
-
-  .node-cap circle { fill:var(--navy); stroke:var(--aqua); stroke-width:1.5; transition:all 0.3s ease; cursor:pointer; transform:scale(0); transform-box:fill-box; transform-origin:center; }
-  .node-cap.identity circle { stroke:var(--gold) !important; stroke-width:2.5 !important; }
-  .node-cap.identity.bloomed circle { stroke:var(--gold) !important; }
-  .node-cap.bloomed circle { animation:bloomIn 0.45s ease forwards; }
-  @keyframes bloomIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
-  .node-cap:hover circle { fill:var(--aqua-dim); filter:drop-shadow(0 0 12px var(--aqua-glow)); }
-  .node-cap.active circle { fill:var(--aqua-dim); filter:drop-shadow(0 0 16px var(--aqua-glow)); stroke-width:2.5; }
-  .node-cap text { fill:var(--white); font-family:'Inter',sans-serif; font-size:9px; font-weight:500; text-anchor:middle; dominant-baseline:middle; pointer-events:none; letter-spacing:0.04em; opacity:0; transition:opacity 0.3s ease 0.3s; }
-  .node-cap.bloomed text { opacity:1; }
-
-  .connector { stroke:rgba(0,212,200,0.15); stroke-width:1; fill:none; opacity:0; transition:opacity 0.4s ease; }
-  .connector.bloomed { opacity:1; }
-  .connector.active { stroke:rgba(0,212,200,0.5); stroke-dasharray:4 3; animation:dash 8s linear infinite; }
-  @keyframes dash { to{stroke-dashoffset:-100} }
-
-  /* DETAIL PANEL — large, wide */
-  .detail-panel {
-    background:rgba(10,22,40,0.95); border:1px solid rgba(0,212,200,0.2);
-    border-radius:6px; padding:1.5rem 2rem;
-    width:90%; max-width:700px;
-    opacity:0; transform:translateY(8px); transition:all 0.4s ease;
+  .case-card.expanded {
+    grid-column: 1 / -1;
   }
-  .detail-panel.visible { opacity:1; transform:translateY(0); }
-  .detail-title { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.22em; color:var(--aqua); text-transform:uppercase; margin-bottom:0.7rem; }
-  .detail-body { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:300; color:var(--white); line-height:1.7; margin-bottom:1rem; }
-  .detail-evidence-label { font-family:'Inter',sans-serif; font-size:0.65rem; color:var(--gold); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.5rem; }
-  .detail-evidence-item { font-family:'Inter',sans-serif; font-size:0.82rem; color:var(--white-dim); line-height:1.6; padding-left:1rem; border-left:1px solid var(--gold-dim); margin-bottom:0.5rem; }
+  .case-card.expanded { border-color:rgba(0,212,200,0.3); }
 
+  .card-eyebrow { font-family:'Space Mono',monospace; font-size:0.52rem; letter-spacing:0.18em; color:rgba(240,244,248,0.3); text-transform:uppercase; margin-bottom:0.8rem; }
+  .card-number { font-family:'DM Sans',sans-serif; font-weight:600; font-size:clamp(2rem,3.5vw,3rem); color:var(--gold); line-height:1; margin-bottom:0.3rem; }
+  .card-number-label { font-family:'Space Mono',monospace; font-size:0.48rem; letter-spacing:0.12em; color:rgba(240,244,248,0.3); text-transform:uppercase; margin-bottom:1.2rem; }
+  .card-title { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.5rem); color:var(--white); line-height:1.3; margin-bottom:1.5rem; opacity:1; }
 
-  .portfolio-link { display:flex; flex-direction:column; align-items:center; gap:0.3rem; text-decoration:none; opacity:0.3; transition:opacity 0.3s ease; }
-  .portfolio-link:hover { opacity:0.78; }
-  .portfolio-link svg { width:24px; height:24px; fill:var(--white); }
-  .portfolio-link span { font-family:'Space Mono',monospace; font-size:0.44rem; letter-spacing:0.1em; color:var(--white-dim); }
-  .tableau-link svg { fill:var(--gold); }
-  .portfolio-link:nth-child(3) svg { fill:var(--aqua); }
+  /* EXPAND TOGGLE */
+  .card-toggle {
+    font-family:'Space Mono',monospace; font-size:0.52rem;
+    letter-spacing:0.15em; color:var(--aqua); text-transform:uppercase;
+    background:none; border:none; cursor:pointer; padding:0;
+    display:flex; align-items:center; gap:0.4rem;
+    margin-bottom:1.5rem; transition:opacity 0.2s ease;
+  }
+  .card-toggle:hover { opacity:0.7; }
+  .toggle-icon { transition:transform 0.3s ease; display:inline-block; }
+  .case-card.expanded .toggle-icon { transform:rotate(180deg); }
 
-  /* CLOSING */
-  .closing { padding:5rem 2rem; text-align:center; border-top:1px solid rgba(240,244,248,0.06); }
-  .closing-quote { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(1.1rem,2.5vw,1.6rem); font-weight:300; color:var(--white-dim); max-width:560px; margin:0 auto 1rem; line-height:1.6; }
-  .closing-identity { font-family:'Cormorant Garamond',serif; font-size:clamp(1.4rem,3.5vw,2.2rem); font-weight:300; color:var(--gold); margin-bottom:1.5rem; }
-  .closing-tagline { font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:300; color:var(--white-dim); letter-spacing:0.08em; margin-bottom:2.5rem; }
+  /* CASE DETAIL */
+  .case-detail { display:none; }
+  .case-card.expanded .case-detail { display:block; }
+
+  .phases { display:flex; flex-direction:column; gap:1.5rem; margin-bottom:1.5rem; }
+  .phase { border-top:1px solid rgba(240,244,248,0.12); padding-top:1.4rem; margin-bottom:0.5rem; }
+  .phase-label { font-family:'Space Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; color:var(--white); text-transform:uppercase; margin-bottom:0.5rem; font-weight:500; }
+  .phase-heading { font-family:'DM Sans',sans-serif; font-weight:600; font-size:clamp(1rem,1.6vw,1.25rem); color:var(--aqua); margin-bottom:0.6rem; letter-spacing:0.01em; }
+  .phase-body { font-family:'Cormorant Garamond',serif; font-weight:400; font-size:clamp(1.05rem,1.6vw,1.25rem); color:rgba(240,244,248,0.95); line-height:1.9; }
+  .phase-body em { color:var(--gold); font-style:italic; }
+  .phase-body strong { color:var(--white); font-weight:400; }
+  .phase-body + .phase-body { margin-top:0.6rem; }
+
+  /* FUTURE CARD PLACEHOLDER */
+  .case-card.placeholder {
+    border:1px dashed rgba(240,244,248,0.1);
+    background:transparent;
+    display:flex; align-items:center; justify-content:center;
+    min-height:200px; cursor:default;
+  }
+  .placeholder-text { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:0.95rem; color:rgba(240,244,248,0.2); text-align:center; }
+
+  /* CTA */
+  .cta-section { padding:3rem 3.5rem 4rem; text-align:center; border-top:1px solid rgba(240,244,248,0.05); }
+  .cta-label { font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:rgba(240,244,248,0.3); text-transform:uppercase; margin-bottom:1.2rem; display:block; }
   .cta-row { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-  .cta-primary { font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--navy); background:var(--gold); border:none; padding:0.85rem 1.8rem; cursor:pointer; transition:all 0.3s ease; text-decoration:none; display:inline-block; }
+  .cta-primary { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--navy); background:var(--gold); border:none; padding:0.9rem 2rem; cursor:pointer; transition:all 0.3s ease; text-decoration:none; display:inline-block; }
   .cta-primary:hover { background:#e0bc6a; transform:translateY(-1px); }
-  .cta-secondary { font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--aqua); background:transparent; border:1px solid var(--aqua); padding:0.85rem 1.8rem; cursor:pointer; transition:all 0.3s ease; text-decoration:none; display:inline-block; }
+  .cta-secondary { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--aqua); background:transparent; border:1px solid var(--aqua); padding:0.9rem 2rem; cursor:pointer; transition:all 0.3s ease; text-decoration:none; display:inline-block; }
   .cta-secondary:hover { background:var(--aqua-dim); transform:translateY(-1px); }
-  .closing-footer { margin-top:3rem; font-family:'Space Mono',monospace; font-size:0.58rem; letter-spacing:0.15em; color:rgba(240,244,248,0.18); }
 
+  /* FOOTER */
+  footer { padding:2.5rem 3.5rem; border-top:1px solid rgba(240,244,248,0.05); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+  .footer-brand { font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; color:rgba(240,244,248,0.18); }
+  .footer-links { display:flex; gap:1.5rem; }
+  .footer-links a { font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.12em; color:rgba(240,244,248,0.28); text-decoration:none; transition:color 0.2s ease; }
+  .footer-links a:hover { color:var(--aqua); }
+
+  .cta-card { justify-content:space-between; }
+  .cta-card .card-title {
+    font-size:clamp(1.1rem,1.7vw,1.3rem) !important;
+    font-weight:400 !important;
+    color:var(--white) !important;
+    opacity:1 !important;
+  }
+  .card-cta-btn {
+    font-family:'Space Mono',monospace; font-size:0.62rem;
+    letter-spacing:0.15em; text-transform:uppercase;
+    color:var(--navy); background:var(--gold);
+    border:none; padding:0.8rem 1.5rem;
+    text-decoration:none; display:inline-block;
+    transition:all 0.3s ease; margin-top:auto;
+  }
+  .card-cta-btn:hover { background:#e0bc6a; transform:translateY(-1px); }
+
+  @media(max-width:900px){
+    .slide-columns { grid-template-columns:1fr; gap:2rem; }
+    .carousel-slide { padding:0 2rem; }
+  }
   @media(max-width:768px){
-    .hero{padding:2rem 1.5rem;}
-    .center-row{flex-direction:column;gap:1rem;}
-    .matrix-wrap{width:100%;}
-    .outcomes-line{padding-left:0;}
-    .teaser-wrap{margin-left:0;}
-    #nodemap{height:360px;}
-    .github-link{position:static;margin-top:2rem;align-self:center;}
+    nav{padding:1.5rem 2rem;}
+    .page-hero,.methodology,.cta-section{padding-left:2rem;padding-right:2rem;}
+    footer{padding:2rem;}
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-brand" href="index.html"><svg width="38" height="34" viewBox="0 0 60 52" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:0.12rem;">
+  <a class="nav-brand" href="index.html">
+    <svg width="38" height="34" viewBox="0 0 60 52" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:0.12rem;">
       <path d="M 8 38 Q 2 26 8 14" fill="none" stroke="#c9a84c" stroke-width="3.5" stroke-linecap="round"/>
       <circle cx="30" cy="26" r="20" fill="#060e1a" stroke="#c9a84c" stroke-width="2.5"/>
       <path d="M 8 38 Q 2 26 8 14" fill="none" stroke="#c9a84c" stroke-width="3.5" stroke-linecap="round"/>
@@ -216,204 +206,203 @@
       <path d="M14 28 Q18 25 22 28 Q26 31 30 28 Q34 25 38 28 Q42 31 46 28" fill="none" stroke="rgba(0,212,200,0.38)" stroke-width="1.1" stroke-linecap="round"/>
       <circle cx="8" cy="14" r="2.2" fill="#c9a84c"/>
       <circle cx="8" cy="38" r="2.2" fill="#c9a84c"/>
-    </svg>CyberPhase Consulting</a>
+    </svg>
+    CyberPhase Consulting
+  </a>
   <div class="nav-links">
-    <a href="clients.html">What I've Done</a>
-    <a href="index.html" class="active">How I Do It</a>
+    <a href="methodology.html">How I Do It</a>
+    <a href="index.html" class="active">What I've Done</a>
     <a href="about.html">Who I Am</a>
     <a href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener">Contact</a>
   </div>
 </nav>
 
-<section class="hero">
-
-
-  <!-- CENTER ROW: slides out on open -->
-  <div class="center-row" id="centerRow">
-    <div class="matrix-wrap">
-      <canvas id="matrixCanvas"></canvas>
-      <div class="chaos-label">From within the chaos,</div>
-    </div>
-    <span class="outcomes-line">&thinsp;I create outcomes.</span>
-    <div class="teaser-wrap" id="teaserWrap">
-      <div class="teaser-node" onclick="enterData()">
-        <svg viewBox="0 0 190 190" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="95" cy="95" r="86" fill="rgba(201,168,76,0.03)"/>
-          <g class="teaser-ring">
-            <circle cx="95" cy="95" r="78" fill="none" stroke="rgba(0,212,200,0.15)" stroke-width="1.5" stroke-dasharray="6 4"/>
-          </g>
-          <circle cx="95" cy="17" r="3.5" fill="rgba(0,212,200,0.45)"/>
-          <circle cx="163" cy="57" r="2.5" fill="rgba(0,212,200,0.3)"/>
-          <circle cx="163" cy="133" r="3.5" fill="rgba(0,212,200,0.45)"/>
-          <circle cx="95" cy="173" r="2.5" fill="rgba(0,212,200,0.3)"/>
-          <circle cx="27" cy="133" r="3.5" fill="rgba(0,212,200,0.45)"/>
-          <circle cx="27" cy="57" r="2.5" fill="rgba(0,212,200,0.3)"/>
-          <circle class="teaser-center" cx="95" cy="95" r="62" fill="#0a1628" stroke="#c9a84c" stroke-width="2"/>
-          <text x="95" y="80" font-family="Cormorant Garamond,serif" font-style="italic" font-size="24" fill="#c9a84c" text-anchor="middle">Enter</text>
-          <text x="95" y="106" font-family="Cormorant Garamond,serif" font-style="italic" font-size="24" fill="#c9a84c" text-anchor="middle">the data.</text>
-          <text x="95" y="126" font-family="Inter,sans-serif" font-size="8" fill="rgba(0,212,200,0.6)" text-anchor="middle" letter-spacing="1.2">CLICK TO EXPLORE</text>
-        </svg>
-      </div>
-    </div>
-  </div>
-
-  <!-- MIC BLOCK: slides down on open -->
-  <div class="mic-block" id="micBlock">
-    <p class="mic1">Michelangelo saw the angel in the marble and carved until he set him free.</p>
-    <p class="mic2">I see the information in the data and carve it free.</p>
-  </div>
-
-  <!-- NODE MAP: fills screen when open -->
-  <div class="nodemap-section" id="nodemapSection">
-    <div style="position:absolute;top:1rem;left:50%;transform:translateX(-50%);text-align:center;z-index:20;">
-      <p style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.18em;color:rgba(0,212,200,0.5);text-transform:uppercase;margin-bottom:0.3rem;">What you're seeing</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:0.9rem;font-weight:300;color:rgba(240,244,248,0.45);max-width:600px;">Cyclistic is a real-world bike share dataset. I used it to demonstrate what happens when an analyst goes deeper than the question asked. Click any node to see how each capability showed up in practice.</p>
-    </div>
-    <svg id="nodemap" viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg">
-      <line class="connector" id="conn-0" x1="350" y1="260" x2="478" y2="168"/>
-      <line class="connector" id="conn-1" x1="350" y1="260" x2="505" y2="295"/>
-      <line class="connector" id="conn-2" x1="350" y1="260" x2="418" y2="395"/>
-      <line class="connector" id="conn-3" x1="350" y1="260" x2="282" y2="395"/>
-      <line class="connector" id="conn-4" x1="350" y1="260" x2="185" y2="295"/>
-      <line class="connector" id="conn-5" x1="350" y1="260" x2="222" y2="168"/>
-      <line class="connector" id="conn-6" x1="350" y1="260" x2="350" y2="115"/>
-
-      <!-- CENTER NODE: click to close -->
-      <g class="node-center" onclick="toggleMap()" style="cursor:pointer">
-        <circle cx="350" cy="260" r="58"/>
-        <text x="350" y="250" font-size="15">Cyclistic</text>
-        <text x="350" y="268" font-size="8.5" fill="rgba(201,168,76,0.55)" font-style="normal" font-family="Inter,sans-serif" letter-spacing="0.04em">tap to close</text>
-      </g>
-
-      <g class="node-cap" data-id="0" onclick="selectCap(0)"><circle cx="478" cy="168" r="36"/><text x="478" y="163">SIGNAL</text><text x="478" y="175">DETECTION</text></g>
-      <g class="node-cap" data-id="1" onclick="selectCap(1)"><circle cx="505" cy="295" r="36"/><text x="505" y="290">PATTERN</text><text x="505" y="302">RECOG.</text></g>
-      <g class="node-cap" data-id="2" onclick="selectCap(2)"><circle cx="418" cy="395" r="36"/><text x="418" y="390">STRATEGIC</text><text x="418" y="402">INFRA</text></g>
-      <g class="node-cap" data-id="3" onclick="selectCap(3)"><circle cx="282" cy="395" r="36"/><text x="282" y="390">DATA</text><text x="282" y="402">ENRICH.</text></g>
-      <g class="node-cap" data-id="4" onclick="selectCap(4)"><circle cx="185" cy="295" r="36"/><text x="185" y="290">SYSTEMS</text><text x="185" y="302">THINKING</text></g>
-      <g class="node-cap" data-id="5" onclick="selectCap(5)"><circle cx="222" cy="168" r="36"/><text x="222" y="163">PARTNER</text><text x="222" y="175">ECOSYS.</text></g>
-      <g class="node-cap identity" data-id="6" onclick="selectCap(6)"><circle cx="350" cy="115" r="36"/><text x="350" y="110">STRATEGIC</text><text x="350" y="122">ARCHITECT</text></g>
-    </svg>
-
-    <div class="detail-panel" id="detail-panel">
-      <div class="detail-title" id="detail-title"></div>
-      <div class="detail-body" id="detail-body"></div>
-      <div class="detail-evidence-label">FROM THE CYCLISTIC DATA —</div>
-      <div id="detail-evidence"></div>
-    </div>
-      <div class="detail-body" id="detail-body"></div>
-      <div class="detail-evidence-label">FROM THE CYCLISTIC DATA —</div>
-      <div id="detail-evidence"></div>
-
-    </div>
-  </div>
-
-<!-- SIGNAL + LINKS -->
-<div style="text-align:center; padding:0.3rem 2rem 1.5rem;">
-  <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.45rem); color:var(--white); line-height:1.9; margin-bottom:0.2rem;">The dataset tells you what.</p>
-  <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.45rem); color:var(--white); line-height:1.9; margin-bottom:0.2rem;">The enrichment tells you why.</p>
-  <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.1rem,1.8vw,1.45rem); color:var(--white); line-height:1.9; margin-bottom:0.2rem;">The analysis tells you how.</p>
-  <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:300; font-size:clamp(1.2rem,2vw,1.6rem); color:var(--gold); margin-bottom:0.8rem; margin-top:1.2rem;">I find the signal in the noise.</p>
-  <p style="font-family:'Inter',sans-serif; font-size:clamp(0.72rem,1vw,0.85rem); font-weight:300; color:rgba(240,244,248,0.6); letter-spacing:0.07em; margin-bottom:1.5rem;">The industries and tools change. The discipline doesn't.</p>
-  <div style="display:flex; gap:2rem; justify-content:center; align-items:center;">
-    <a href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.3rem; text-decoration:none; opacity:0.6; transition:opacity 0.3s ease;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="#00d4c8" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      <span style="font-family:'Space Mono',monospace; font-size:0.46rem; letter-spacing:0.1em; color:rgba(240,244,248,0.5);">LinkedIn</span>
-    </a>
-    <a href="https://github.com/cdcosby" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.3rem; text-decoration:none; opacity:0.6; transition:opacity 0.3s ease;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
-      <svg width="24" height="24" viewBox="0 0 98 96" fill="#00d4c8" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
-      <span style="font-family:'Space Mono',monospace; font-size:0.46rem; letter-spacing:0.1em; color:rgba(240,244,248,0.5);">GitHub</span>
-    </a>
-    <a href="https://public.tableau.com/app/profile/cdcosby" target="_blank" rel="noopener" style="display:flex; flex-direction:column; align-items:center; gap:0.3rem; text-decoration:none; opacity:0.6; transition:opacity 0.3s ease;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
-      <svg width="24" height="24" viewBox="0 0 32 32" fill="#c9a84c" xmlns="http://www.w3.org/2000/svg"><path d="M15 6h2v6h6v2h-6v6h-2v-6H9v-2h6z"/><path d="M22 2h2v4h4v2h-4v4h-2V8h-4V6h4zM8 2h2v4h4v2h-4v4H8V8H4V6h4zM22 20h2v4h4v2h-4v4h-2v-4h-4v-2h4zM8 20h2v4h4v2h-4v4H8v-4H4v-2h4z"/></svg>
-      <span style="font-family:'Space Mono',monospace; font-size:0.46rem; letter-spacing:0.1em; color:rgba(240,244,248,0.5);">Tableau</span>
-    </a>
-  </div>
-
-</section>
-
+<div class="page-hero">
+  <span class="page-eyebrow">Client Engagements</span>
+  <h1 class="page-title">What happens when I<br>walk into your operation.</h1>
 </div>
 
+<div class="methodology">
+  <span class="method-label">The Methodology</span>
+  <p class="method-statement">
+    I come in. I read the system. I identify where value is being lost.
+    I fix the foundation first. Then I rebuild the structure.
+    Create the ecosystem. <em>And the numbers follow.</em>
+  </p>
+</div>
+
+<!-- CAROUSEL -->
+<div class="carousel-section">
+  <div class="carousel-nav">
+    <button class="carousel-arrow" id="prevBtn" onclick="moveCarousel(-1)" disabled>&#8592;</button>
+    <span style="font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.15em;color:rgba(240,244,248,0.25);" id="slideLabel">01 / 02</span>
+    <button class="carousel-arrow" id="nextBtn" onclick="moveCarousel(1)">&#8594;</button>
+  </div>
+
+  <div class="carousel-track-wrap">
+    <div class="carousel-track" id="carouselTrack">
+
+      <!-- SLIDE 1: Current two clients -->
+      <div class="carousel-slide">
+        <div class="slide-columns">
+
+          <!-- CLIENT A -->
+          <div class="case-card" id="cardA">
+            <div class="card-eyebrow">Client A · Hospitality · Houston, TX</div>
+            <div class="card-number">$600K+</div>
+            <div class="card-number-label">Gross revenue increase · one unit · $2M+ per unit · two locations</div>
+            <h2 class="card-title">A 42-year-old institution that had never advertised.<br>I changed that. The numbers followed.</h2>
+            <button class="card-toggle" onclick="toggleCard('cardA')">
+              <span>Read the full engagement</span>
+              <span class="toggle-icon">&#8964;</span>
+            </button>
+            <div class="case-detail">
+              <div class="phases">
+                <div class="phase">
+                  <div class="phase-label">Phase 1 · Foundation &amp; Compliance</div>
+                  <p class="phase-heading">Safety, plant, staff — in that order.</p>
+                  <p class="phase-body">Walked in to find a fire suppression system two years out of date. Fixed before anything else. Then ventilation, electrical — equipment running on extension cords — and a cooler that needed relining. <strong>Nothing else matters if the foundation isn't safe and compliant.</strong> Staff evaluated against actual capability, not current title. A food runner who was a trained cook elsewhere was moved, given a raise to compensate for lost tip share, and placed correctly. A line cook creating friction was replaced with a known quantity. Ticket times dropped <em>fifty percent.</em></p>
+                </div>
+                <div class="phase">
+                  <div class="phase-label">Phase 2 · Menu &amp; Margin</div>
+                  <p class="phase-heading">Waste streams converted to revenue.</p>
+                  <p class="phase-body">Recosted the entire menu at actual 2007–2008 market prices. Then looked at what was being thrown away. Tuna scraps became <em>$15-a-plate seared tuna logs</em> with strawberry, avocado, and balsamic drizzle. Beef trim became carpaccio. Salmon shavings became lemon pepper skewers. Cook-off fish became bite-sized fish cakes with sour cream sauce. Sweet potato and polenta — made fresh daily — combined at end of day, chilled overnight, cut into cakes, dusted in flour, deep fried. <em>Zero additional food cost. New menu item.</em> Leftover roasted chicken combined with the polenta cakes and a housemade chipotle ranch became another composed dish.</p>
+                  <p class="phase-body">The owner wanted a chocolate lava cake. I held my ground. <em>Chocolate lava cakes are popular — and everyone can get one everywhere. What you really want is something so good people can't get it anywhere else.</em> Introduced my recipe for white chocolate blueberry bread pudding — croissant base, dried blueberry pieces, white chocolate drizzle. When In Town magazine featured the restaurant, that was one of the items they photographed. Differentiation over trend. Every time.</p>
+                </div>
+                <div class="phase">
+                  <div class="phase-label">Phase 3 · Revenue Ecosystem</div>
+                  <p class="phase-heading">Happy hour as customer acquisition. Vendor partnerships as revenue events.</p>
+                  <p class="phase-body">Reinvented happy hour from institutional mediocrity into an experience that drove traffic and word of mouth. The argument with the owner: <em>the price of a drink is the price of a drink. The food is what draws the people.</em> Won the argument. Built a business card collection system and email marketing — in 2007. Partnered with the liquor vendor to turn routine rep visits into tasting events where customers could buy full bottles on the spot. Expanded catering. Added city holiday parties. Built the flywheel.</p>
+                </div>
+                <div class="phase">
+                  <div class="phase-label">Phase 4 · Culture &amp; Operations</div>
+                  <p class="phase-heading">Engagement, punctuality, and sales training built into the daily routine.</p>
+                  <p class="phase-body">I created a space for the cooks to come into my office after the lunch rush — sit down, eat together, decompress. <em>Do you have something you'd like to make for next week's special?</em> Specials rotated every Tuesday. The cooks drove the ideas. Every Tuesday morning, fifteen minutes before service, the whole kitchen made the weekly special and everyone tasted it — the bartender sommelier recommended a wine pairing. Staff went onto the floor knowing exactly what they were selling. That's not a tasting. That's a sales meeting.</p>
+                  <p class="phase-body">Every Friday morning I cooked breakfast for the staff — pancakes, sausage, bacon, sometimes barbacoa and breakfast tacos. <strong>If you wanted Friday breakfast, you had to be there early.</strong> Punctuality solved through culture, not discipline. They loved the pancakes. Any time a menu item changed, every server tasted it. New servers tasted the entire menu before their first shift. <em>You can't sell what you haven't experienced.</em></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CLIENT B -->
+          <div class="case-card" id="cardB">
+            <div class="card-eyebrow">Client B · Private Estate · 18 Years</div>
+            <div class="card-number">$324K+</div>
+            <div class="card-number-label">Annual savings · vendor restructure + facilities &amp; infrastructure rebuild</div>
+            <h2 class="card-title">Full estate management — financial, operational, and infrastructure — for eighteen years.</h2>
+            <button class="card-toggle" onclick="toggleCard('cardB')">
+              <span>Read the full engagement</span>
+              <span class="toggle-icon">&#8964;</span>
+            </button>
+            <div class="case-detail">
+              <div class="phases">
+                <div class="phase">
+                  <div class="phase-label">Engagement · Financial &amp; Vendor Audit</div>
+                  <p class="phase-heading">Read the system. Find where value is being lost.</p>
+                  <p class="phase-body">Took over financial management for a private household. Audited existing vendor relationships — every service, every contract, every recurring cost. Evaluated service quality against actual cost. Identified where equivalent or better service was available at lower cost. Restructured the vendor portfolio. <em>$18,000+ saved annually — $324,000+ over the engagement</em> — without sacrificing service quality.</p>
+                </div>
+                <div class="phase">
+                  <div class="phase-label">Facilities &amp; Property Management</div>
+                  <p class="phase-heading">Responsible for all maintenance of the property.</p>
+                  <p class="phase-body">Full responsibility for property maintenance including landscaping and all physical plant. The house was built in 1974 — due to its age, it was time to reclad and paint the exterior. Had the house completely reclad in HardiBoard. The original electrical was designed for 1974 load requirements — modern living demands far more outlets and capacity. Had the electrical system upgraded throughout to compensate. Found an exterior panel that was out of code and had it replaced. <strong>Stewardship decisions, not crisis response.</strong></p>
+                </div>
+                <div class="phase">
+                  <div class="phase-label">Infrastructure Engineering</div>
+                  <p class="phase-heading">Research, specify, install, optimize.</p>
+                  <p class="phase-body">The upstairs converted attic space was running hot and expensive. Researched and specified a full HVAC system upgrade. Had the space properly insulated to reduce the operating load before the new system went in. To prevent debris from collecting in the new unit outside, I designed a custom liftable cover using solar screen material. <em>Full airflow. No debris ingestion. Shaded from direct heat.</em></p>
+                  <p class="phase-body">Lower operating temperature. Lower energy cost. Longer equipment life. <strong>That's not a maintenance decision. That's an engineering decision.</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- END SLIDE 1 -->
+
+      <!-- SLIDE 2: CTA cards -->
+      <div class="carousel-slide">
+        <div class="slide-columns">
+
+          <div class="case-card cta-card">
+            <div class="card-eyebrow">Your Organization</div>
+            <div class="card-number" style="font-size:clamp(1.4rem,2.5vw,2rem);margin-bottom:0.8rem;">Picture your<br>data here.</div>
+            <p class="card-title" style="font-size:clamp(0.95rem,1.4vw,1.1rem);font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--white-dim);line-height:1.75;margin-bottom:1.5rem;">Your data is trying to tell you something. But it's hard to find the signal when you're in a blizzard of data. I go in, read the system, and model your data into a three-dimensional nodal structure. Rotate it. Examine it from every angle. That's how the outliers surface — and that's where your data actually lives. Not only the what, but the why, the how, the fix — and how to apply that knowledge.</p>
+            <a class="card-cta-btn" href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener">Start the conversation</a>
+          </div>
+
+          <div class="case-card cta-card">
+            <div class="card-eyebrow">Your Outcomes</div>
+            <div class="card-number" style="font-size:clamp(1.4rem,2.5vw,2rem);margin-bottom:0.8rem;">Your data.<br>Your outcomes.<br>Your numbers.</div>
+            <p class="card-title" style="font-size:clamp(0.95rem,1.4vw,1.1rem);font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--white-dim);line-height:1.75;margin-bottom:1.5rem;">The methodology works in any industry. Hospitality. Energy. Healthcare. Financial services. The tools change. The discipline doesn't. What I find in your data depends on what's there — and there's always more than anyone expected.</p>
+            <a class="card-cta-btn" href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener">Let's talk</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <span class="cta-label">Ready to navigate?</span>
+  <div class="cta-row">
+    <a class="cta-primary" href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener">Start the conversation</a>
+    <a class="cta-secondary" href="index.html">See the work</a>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-brand">CyberPhase Consulting · Founded 1983 by George Douglas Cosby · Revived 2024</span>
+  <div class="footer-links">
+    <a href="https://github.com/cdcosby" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://public.tableau.com/app/profile/cdcosby" target="_blank" rel="noopener">Tableau</a>
+    <a href="https://linkedin.com/in/cherriecosby" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://cyberphase.consulting">cyberphase.consulting</a>
+  </div>
+</footer>
+
 <script>
-// MATRIX
-window.addEventListener('load',()=>{
-  const canvas=document.getElementById('matrixCanvas');
-  const wrap=canvas.parentElement;
-  const ctx=canvas.getContext('2d');
-  function resize(){canvas.width=wrap.offsetWidth;canvas.height=wrap.offsetHeight;}
-  resize();
-  const chars='アイウエオカキクケコサシスセソ0123456789ABCDEF∑∂∇≈≠±×÷∞√';
-  const fs=11; let drops=[];
-  function initDrops(){drops=Array(Math.floor(canvas.width/fs)).fill(1);}
-  initDrops();
-  window.addEventListener('resize',()=>{resize();initDrops();});
-  setInterval(()=>{
-    ctx.fillStyle='rgba(6,14,26,0.07)';ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle='#00ff41';ctx.font=fs+'px monospace';
-    drops.forEach((y,i)=>{ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*fs,y*fs);if(y*fs>canvas.height&&Math.random()>0.975)drops[i]=0;drops[i]++;});
-  },50);
-});
+// ── CAROUSEL ──
+const track = document.getElementById('carouselTrack');
+const slides = track.querySelectorAll('.carousel-slide');
+const totalSlides = slides.length;
+let current = 0;
 
-let mapOpen=false;
-
-function enterData(){
-  if(mapOpen)return;
-  mapOpen=true;
-  document.getElementById('centerRow').classList.add('slide-out');
-  document.getElementById('micBlock').classList.add('slide-out');
-  setTimeout(()=>{
-    document.getElementById('nodemapSection').classList.add('visible');
-    document.querySelectorAll('.connector').forEach((c,i)=>setTimeout(()=>c.classList.add('bloomed'),i*70));
-    document.querySelectorAll('.node-cap').forEach((n,i)=>setTimeout(()=>n.classList.add('bloomed'),80+i*110));
-  },400);
+function goToSlide(n) {
+  current = n;
+  track.style.transform = `translateX(-${current * 100}%)`;
+  document.getElementById('slideLabel').textContent = `0${current+1} / 0${totalSlides}`;
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === totalSlides - 1;
 }
 
-function toggleMap(){
-  if(!mapOpen)return;
-  mapOpen=false;
-  activeId=null;
-  document.getElementById('detail-panel').classList.remove('visible');
-  document.querySelectorAll('.node-cap').forEach(n=>n.classList.remove('bloomed','active'));
-  document.querySelectorAll('.connector').forEach(c=>c.classList.remove('bloomed','active'));
-  document.querySelectorAll('.node-evidence').forEach(e=>e.classList.remove('visible'));
-  document.querySelectorAll('.connector-evidence').forEach(c=>c.classList.remove('visible'));
-  document.getElementById('nodemapSection').classList.remove('visible');
-  setTimeout(()=>{
-    document.getElementById('centerRow').classList.remove('slide-out');
-    document.getElementById('micBlock').classList.remove('slide-out');
-  },200);
+function moveCarousel(dir) {
+  goToSlide(Math.max(0, Math.min(totalSlides - 1, current + dir)));
 }
 
-const caps={
-  0:{label:'Signal Detection',body:'I find what the data is actually saying — not just what you asked it. The signal is already there. It just needs someone trained to hear it.',evidence:['Independence Day ranks 12th in ridership volume — and 1st in casual conversion rate at 60.75%. Volume was the wrong metric.','On two occasions in 2022, Cyclistic bikes functioned as emergency mobility infrastructure when transit systems failed. Nobody was watching for that signal.','Juneteenth, Chicago Pride, and Eid al-Adha rank 2nd, 3rd, and 4th in conversion rate. They were not being targeted.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  1:{label:'Pattern Recognition',body:"I don't just see individual data points — I see the shape they make over time, across geography, across conditions. The pattern is the insight.",evidence:["Member riders trace a clockwise seasonal migration arc across Chicago throughout the year — predictable enough to get ahead of demand rather than chase it.","In July, 53,288 casual and 57,951 member riders converge at the Chicago River corridor. That's the highest-value conversion moment in the dataset.",'Temperature drives ridership. Wind does not. Precipitation does.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  2:{label:'Strategic Infrastructure',body:'I build the systems that make the analysis possible — end-to-end, from raw data to actionable insight. The infrastructure is the foundation.',evidence:['5.6 million rows of Divvy ride data ingested into ClickHouse Cloud, enriched with weather, holidays, and lunar data.','Multi-source enrichment: Visual Crossing weather (27 fields), 55 custom holiday records, lunar phase data — all joined at the ride level.','A flooding outlier on July 23 surfaced a B2G city partnership recommendation. That finding only exists because the infrastructure captured it.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  3:{label:'Data Enrichment',body:'Raw data tells you what happened. Enrichment tells you why. I bring in the context that transforms a report into a strategy.',evidence:['27-field weather dataset from Visual Crossing joined at the daily ride level.','55 holiday records covering federal, multicultural, and Chicago-specific events. Labor Day was missing from the source. I found it and inserted it manually.','Lunar phase data joined to test a hypothesis. The hypothesis was disproven. That\'s also a finding.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  4:{label:'Systems Thinking',body:'I see the whole system — not just the question asked. Every dataset is answering more questions than the one you came in with.',evidence:['The original question was about marketing. The data also answered an operational question about bike inventory rebalancing. I answered both.','Volume is the wrong conversion metric. Independence Day proves it.','The analysis was commissioned as a marketing review. It surfaced an emergency mobility finding and a government partnership opportunity.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  5:{label:'Partner Ecosystems',body:"I identify where your data reveals partnership opportunities — with cities, agencies, organizations — that weren't part of the original question.",evidence:["Two transit emergencies in 2022 showed Cyclistic functioning as city infrastructure. That's a government contract waiting to be written.",'The flooding event on July 23 created a casual ridership spike when roads were impassable.','A formal MOU with the City of Chicago around emergency mobility could change the entire funding landscape.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  6:{label:'Strategic Architect',body:"I've been designing analytical infrastructure since before it had a name. The title came later. The discipline was always there.",evidence:['40+ years across aviation, energy, food manufacturing, financial services, healthcare, and operations — one consistent instinct: see the structure underneath.','Started programming in 1980. Built dimensional forecasting models in 1995 before dashboards existed.','The credential follows the competence. It always has.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'}
-};
-
-let activeId=null;
-function selectCap(id){
-  if(!mapOpen)return;
-  if(activeId!==null){
-    document.querySelector(`.node-cap[data-id="${activeId}"]`).classList.remove('active');
-    document.getElementById(`conn-${activeId}`).classList.remove('active');
-    
-  }
-  if(activeId===id){activeId=null;document.getElementById('detail-panel').classList.remove('visible');return;}
-  activeId=id;
-  document.querySelector(`.node-cap[data-id="${id}"]`).classList.add('active');
-  document.getElementById(`conn-${id}`).classList.add('active');
+// ── CARD EXPAND/COLLAPSE ──
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  const isExpanding = !card.classList.contains('expanded');
   
-  const cap=caps[id];
-  document.getElementById('detail-title').textContent=cap.label;
-  document.getElementById('detail-body').textContent=cap.body;
-  const ev=document.getElementById('detail-evidence');
-  ev.innerHTML='';
-  cap.evidence.forEach(e=>{const d=document.createElement('div');d.className='detail-evidence-item';d.textContent=e;ev.appendChild(d);});
-  document.getElementById('detail-panel').classList.add('visible');
-  // no scroll
+  // Find the slide-columns container and the other card
+  const col = card.closest('.slide-columns');
+  const allCards = col.querySelectorAll('.case-card:not(.cta-card):not(.placeholder)');
+  
+  if (isExpanding) {
+    card.classList.add('expanded');
+    allCards.forEach(c => {
+      if (c !== card) c.classList.add('hidden-card');
+    });
+  } else {
+    card.classList.remove('expanded');
+    allCards.forEach(c => c.classList.remove('hidden-card'));
+  }
+  
+  const btn = card.querySelector('.card-toggle span:first-child');
+  btn.textContent = card.classList.contains('expanded') ? 'Close' : 'Read the full engagement';
 }
 </script>
 </body>
