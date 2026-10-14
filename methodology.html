@@ -149,6 +149,9 @@
     opacity:0; transform:translateY(8px); transition:all 0.4s ease;
   }
   .detail-panel.visible { opacity:1; transform:translateY(0); }
+  .tap-hint { font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.22em; color:var(--gold); text-transform:uppercase; margin:-0.5rem 0 1rem; opacity:0; transition:opacity 0.6s ease; animation:hintPulse 2.4s ease-in-out infinite; }
+  .tap-hint.visible { opacity:0.85; }
+  @keyframes hintPulse { 0%,100%{filter:brightness(0.8)} 50%{filter:brightness(1.25)} }
   .detail-title { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.22em; color:var(--aqua); text-transform:uppercase; margin-bottom:0.7rem; }
   .detail-body { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:300; color:var(--white); line-height:1.7; margin-bottom:1rem; }
   .detail-evidence-label { font-family:'Inter',sans-serif; font-size:0.65rem; color:var(--gold); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:0.5rem; }
@@ -294,15 +297,13 @@
       <g class="node-cap identity" data-id="6" onclick="selectCap(6)"><circle cx="350" cy="115" r="36"/><text x="350" y="110">STRATEGIC</text><text x="350" y="122">ARCHITECT</text></g>
     </svg>
 
+    <div class="tap-hint" id="tap-hint">Tap any circle to explore</div>
     <div class="detail-panel" id="detail-panel">
       <div class="detail-title" id="detail-title"></div>
       <div class="detail-body" id="detail-body"></div>
-      <div class="detail-evidence-label">FROM THE CYCLISTIC DATA —</div>
+      <div class="detail-evidence-label">FROM THE CYCLISTIC DATA</div>
       <div id="detail-evidence"></div>
     </div>
-      <div class="detail-body" id="detail-body"></div>
-      <div class="detail-evidence-label">FROM THE CYCLISTIC DATA —</div>
-      <div id="detail-evidence"></div>
 
     </div>
   </div>
@@ -364,6 +365,10 @@ function enterData(){
     document.getElementById('nodemapSection').classList.add('visible');
     document.querySelectorAll('.connector').forEach((c,i)=>setTimeout(()=>c.classList.add('bloomed'),i*70));
     document.querySelectorAll('.node-cap').forEach((n,i)=>setTimeout(()=>n.classList.add('bloomed'),80+i*110));
+    setTimeout(()=>{
+      document.getElementById('tap-hint').classList.add('visible');
+      if(mapOpen && activeId===null) selectCap(0);
+    },1000);
   },400);
 }
 
@@ -372,6 +377,7 @@ function toggleMap(){
   mapOpen=false;
   activeId=null;
   document.getElementById('detail-panel').classList.remove('visible');
+  document.getElementById('tap-hint').classList.remove('visible');
   document.querySelectorAll('.node-cap').forEach(n=>n.classList.remove('bloomed','active'));
   document.querySelectorAll('.connector').forEach(c=>c.classList.remove('bloomed','active'));
   document.querySelectorAll('.node-evidence').forEach(e=>e.classList.remove('visible'));
@@ -384,13 +390,13 @@ function toggleMap(){
 }
 
 const caps={
-  0:{label:'Signal Detection',body:'I find what the data is actually saying — not just what you asked it. The signal is already there. It just needs someone trained to hear it.',evidence:['Independence Day ranks 12th in ridership volume — and 1st in casual conversion rate at 60.75%. Volume was the wrong metric.','On two occasions in 2022, Cyclistic bikes functioned as emergency mobility infrastructure when transit systems failed. Nobody was watching for that signal.','Juneteenth, Chicago Pride, and Eid al-Adha rank 2nd, 3rd, and 4th in conversion rate. They were not being targeted.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  1:{label:'Pattern Recognition',body:"I don't just see individual data points — I see the shape they make over time, across geography, across conditions. The pattern is the insight.",evidence:["Member riders trace a clockwise seasonal migration arc across Chicago throughout the year — predictable enough to get ahead of demand rather than chase it.","In July, 53,288 casual and 57,951 member riders converge at the Chicago River corridor. That's the highest-value conversion moment in the dataset.",'Temperature drives ridership. Wind does not. Precipitation does.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  2:{label:'Strategic Infrastructure',body:'I build the systems that make the analysis possible — end-to-end, from raw data to actionable insight. The infrastructure is the foundation.',evidence:['5.6 million rows of Divvy ride data ingested into ClickHouse Cloud, enriched with weather, holidays, and lunar data.','Multi-source enrichment: Visual Crossing weather (27 fields), 55 custom holiday records, lunar phase data — all joined at the ride level.','A flooding outlier on July 23 surfaced a B2G city partnership recommendation. That finding only exists because the infrastructure captured it.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
+  0:{label:'Signal Detection',body:'I find what the data is actually saying, not just what you asked it. The signal is already there. It just needs someone trained to hear it.',evidence:['Independence Day ranks 12th in ridership volume, and 1st in casual conversion rate at 60.75%. Volume was the wrong metric.','On two occasions in 2022, Cyclistic bikes functioned as emergency mobility infrastructure when transit systems failed. Nobody was watching for that signal.','Juneteenth, Chicago Pride, and Eid al-Adha rank 2nd, 3rd, and 4th in conversion rate. They were not being targeted.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
+  1:{label:'Pattern Recognition',body:"I don't just see individual data points. I see the shape they make over time, across geography, across conditions. The pattern is the insight.",evidence:["Member riders trace a clockwise seasonal migration arc across Chicago throughout the year, predictable enough to get ahead of demand rather than chase it.","In July, 53,288 casual and 57,951 member riders converge at the Chicago River corridor. That's the highest-value conversion moment in the dataset.",'Temperature drives ridership. Wind does not. Precipitation does.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
+  2:{label:'Strategic Infrastructure',body:'I build the systems that make the analysis possible, end-to-end, from raw data to actionable insight. The infrastructure is the foundation.',evidence:['5.6 million rows of Divvy ride data ingested into ClickHouse Cloud, enriched with weather, holidays, and lunar data.','Multi-source enrichment: Visual Crossing weather (27 fields), 55 custom holiday records, lunar phase data, all joined at the ride level.','A flooding outlier on July 23 surfaced a B2G city partnership recommendation. That finding only exists because the infrastructure captured it.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
   3:{label:'Data Enrichment',body:'Raw data tells you what happened. Enrichment tells you why. I bring in the context that transforms a report into a strategy.',evidence:['27-field weather dataset from Visual Crossing joined at the daily ride level.','55 holiday records covering federal, multicultural, and Chicago-specific events. Labor Day was missing from the source. I found it and inserted it manually.','Lunar phase data joined to test a hypothesis. The hypothesis was disproven. That\'s also a finding.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  4:{label:'Systems Thinking',body:'I see the whole system — not just the question asked. Every dataset is answering more questions than the one you came in with.',evidence:['The original question was about marketing. The data also answered an operational question about bike inventory rebalancing. I answered both.','Volume is the wrong conversion metric. Independence Day proves it.','The analysis was commissioned as a marketing review. It surfaced an emergency mobility finding and a government partnership opportunity.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  5:{label:'Partner Ecosystems',body:"I identify where your data reveals partnership opportunities — with cities, agencies, organizations — that weren't part of the original question.",evidence:["Two transit emergencies in 2022 showed Cyclistic functioning as city infrastructure. That's a government contract waiting to be written.",'The flooding event on July 23 created a casual ridership spike when roads were impassable.','A formal MOU with the City of Chicago around emergency mobility could change the entire funding landscape.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
-  6:{label:'Strategic Architect',body:"I've been designing analytical infrastructure since before it had a name. The title came later. The discipline was always there.",evidence:['40+ years across aviation, energy, food manufacturing, financial services, healthcare, and operations — one consistent instinct: see the structure underneath.','Started programming in 1980. Built dimensional forecasting models in 1995 before dashboards existed.','The credential follows the competence. It always has.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'}
+  4:{label:'Systems Thinking',body:'I see the whole system, not just the question asked. Every dataset is answering more questions than the one you came in with.',evidence:['The original question was about marketing. The data also answered an operational question about bike inventory rebalancing. I answered both.','Volume is the wrong conversion metric. Independence Day proves it.','The analysis was commissioned as a marketing review. It surfaced an emergency mobility finding and a government partnership opportunity.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
+  5:{label:'Partner Ecosystems',body:"I identify where your data reveals partnership opportunities with cities, agencies, and organizations that weren't part of the original question.",evidence:["Two transit emergencies in 2022 showed Cyclistic functioning as city infrastructure. That's a government contract waiting to be written.",'The flooding event on July 23 created a casual ridership spike when roads were impassable.','A formal MOU with the City of Chicago around emergency mobility could change the entire funding landscape.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'},
+  6:{label:'Strategic Architect',body:"I've been designing analytical infrastructure since before it had a name. The title came later. The discipline was always there.",evidence:['40+ years across aviation, energy, food manufacturing, financial services, healthcare, and operations. One consistent instinct: see the structure underneath.','Started programming in 1980. Built dimensional forecasting models in 1995 before dashboards existed.','The credential follows the competence. It always has.'],github:'https://github.com/cdcosby/Data-Analytics-Portfolio'}
 };
 
 let activeId=null;
